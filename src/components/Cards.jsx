@@ -1,4 +1,5 @@
 import { Avatar, Box, Typography,  } from "@mui/material"
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 
 const Cards = () => {
 
@@ -42,12 +43,32 @@ const Cards = () => {
             alignItems="center"
             m={2}
             key={child.id}
+            position="relative"
+            
+            
             
             >
             <Avatar
               alt={child.name}
               src={child.imgPath}
               sx={{ width: 100, height: 100 }}
+              // position="relative"
+
+            />
+            <DeleteForeverRoundedIcon
+            fontSize="large" 
+            sx={{
+              position: 'absolute',
+              top: 35,
+              right: 35,
+              cursor: 'pointer',
+              color: 'red',
+              '&:hover': {
+                color: 'black',
+              },
+              zIndex: 1,
+            }}
+          
             />
             <Typography variant="h5" p={2}>
               {child.name}
