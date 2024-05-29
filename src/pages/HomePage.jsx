@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import InputChildName from "../components/InputChildName"
 import Cards from "../components/Cards"
 import DateToday from "../components/DateToday"
+import ChildStatus from "../components/ChildStatus"
 
 
 const HomePage = () => {
@@ -30,6 +31,10 @@ const HomePage = () => {
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
         <DateToday />
+        </Box>
+
+        <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
+        <ChildStatus />
         </Box>
 
     </Container>
