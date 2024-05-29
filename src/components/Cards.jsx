@@ -38,8 +38,6 @@ const Cards = (props) => {
               display: "none",
               position: "absolute",
               color: "red",
-              // top: "5px",
-              // right: "5px",
             }}
           />
           <Typography variant="h5" p={2}>

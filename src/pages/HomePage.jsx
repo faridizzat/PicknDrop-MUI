@@ -27,18 +27,14 @@ const HomePage = () => {
   const [childList, setChildList] = useState([]);
 
   const handleAddNewChildName = (name) => {
-    console.log("from HomePage >>", name);
     const newChild = {
       id: generateRandomHex(),
       name,
       imgPath: generateRandomImage(),
     };
-    console.log("newChild >>", newChild);
 
     const newChildList = [...childList, newChild];
     setChildList(newChildList);
-
-    console.log("newChildList >>", newChildList);
   };
 
   return (
