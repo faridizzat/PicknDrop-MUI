@@ -9,20 +9,24 @@ import ActionButton from "../components/ActionButton"
 
 const HomePage = () => {
 
+  const handleAddNewChildName = (name) => {
+    console.log("from HomePage >>", name)
+  }
+
 
   return (
     <>
     <Navbar />
     <Container maxWidth="lg">
         
-        {/* Title */}
+        {/* Title
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
         <Typography variant="h4">PicknDrop</Typography>
-        </Box>
+        </Box> */}
 
         {/* Input field */}
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-        <InputChildName />
+        <InputChildName addNewChildName={handleAddNewChildName}/>
         </Box>
 
         {/* Avatar */}
