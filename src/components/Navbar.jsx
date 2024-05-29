@@ -4,11 +4,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
+import { Container } from "@mui/material";
 
 export default function Navbar() {
   return (
+
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#Ffcc00" }}>
+      <Container maxWidth="lg">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <Link
@@ -43,6 +46,7 @@ export default function Navbar() {
             Logout
           </Button>
         </Toolbar>
+         </Container>
       </AppBar>
     </Box>
   );
