@@ -7,17 +7,17 @@ const ChildStatus = () => {
         {
             id: 1,
             name: "Eren",
-            imgPath: "xxx"
+            imgPath: "src/assets/avatar-boy1-svgrepo-com.svg"
         },
         {
             id: 2,
             name: "Mikasa",
-            imgPath: "xxx"
+            imgPath: "src/assets/avatar-girl-svgrepo-com.svg"
         },
         {
             id: 3,
             name: "Armin",
-            imgPath: "xxx"
+            imgPath: "src/assets/avatar-boy-svgrepo-com.svg"
         },
     ]
 
@@ -25,12 +25,12 @@ const ChildStatus = () => {
         {
             id: 4,
             name: "Reiner",
-            imgPath: "xxx"
+            imgPath: "src/assets/avatar-boy2-svgrepo-com.svg"
         },
         {
             id: 5,
             name: "Annie",
-            imgPath: "xxx"
+            imgPath: "src/assets/avatar-girl1-svgrepo-com.svg"
         }
     ]
   return (
