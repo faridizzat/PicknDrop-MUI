@@ -2,6 +2,7 @@ import { Container, Box, Typography } from "@mui/material"
 import Navbar from "../components/Navbar"
 import InputChildName from "../components/InputChildName"
 import Cards from "../components/Cards"
+import DateToday from "../components/DateToday"
 
 
 const HomePage = () => {
@@ -25,6 +26,10 @@ const HomePage = () => {
         {/* Avatar */}
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
         <Cards />
+        </Box>
+
+        <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
+        <DateToday />
         </Box>
 
     </Container>
