@@ -1,34 +1,9 @@
 import { Avatar, Box, Typography } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import PropTypes from "prop-types";
 
-const Cards = () => {
-  const childs = [
-    {
-      id: 1,
-      name: "Eren",
-      imgPath: "src/assets/avatar-boy1-svgrepo-com.svg",
-    },
-    {
-      id: 2,
-      name: "Mikasa",
-      imgPath: "src/assets/avatar-girl-svgrepo-com.svg",
-    },
-    {
-      id: 3,
-      name: "Armin",
-      imgPath: "src/assets/avatar-boy-svgrepo-com.svg",
-    },
-    {
-      id: 4,
-      name: "Reiner",
-      imgPath: "src/assets/avatar-boy2-svgrepo-com.svg",
-    },
-    {
-      id: 5,
-      name: "Annie",
-      imgPath: "src/assets/avatar-girl1-svgrepo-com.svg",
-    },
-  ];
+const Cards = (props) => {
+  const childList = props.childList;
 
   return (
     <Box
@@ -37,7 +12,7 @@ const Cards = () => {
       flexWrap="wrap"
       justifyContent="center"
     >
-      {childs.map((child) => (
+      {childList.map((child) => (
         <Box
           display="flex"
           flexDirection="column"
@@ -45,25 +20,26 @@ const Cards = () => {
           m={2}
           key={child.id}
           position="relative"
+          sx={{
+            "&:hover .deleteIcon": {
+              display: "inline-block",
+            },
+          }}
         >
           <Avatar
             alt={child.name}
             src={child.imgPath}
             sx={{ width: 100, height: 100 }}
-            // position="relative"
           />
           <DeleteForeverRoundedIcon
             fontSize="large"
+            className="deleteIcon"
             sx={{
+              display: "none",
               position: "absolute",
-              top: 35,
-              right: 35,
-              cursor: "pointer",
               color: "red",
-              "&:hover": {
-                color: "black",
-              },
-              zIndex: 1,
+              // top: "5px",
+              // right: "5px",
             }}
           />
           <Typography variant="h5" p={2}>
@@ -73,6 +49,10 @@ const Cards = () => {
       ))}
     </Box>
   );
+};
+
+Cards.propTypes = {
+  childList: PropTypes.array,
 };
 
 export default Cards;

@@ -16,9 +16,7 @@ const InputChildName = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    props.addNewChildName({
-      newChildName,
-    });
+    props.addNewChildName(newChildName);
 
     event.target.reset();
   };
