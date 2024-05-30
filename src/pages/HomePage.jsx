@@ -37,6 +37,14 @@ const HomePage = () => {
     setChildList(newChildList);
   };
 
+  const [isSelected, setIsSelected] = useState(false);
+
+  const handleChecked = (event) => {
+    setIsSelected((prevIsSeleceted) => !prevIsSeleceted);
+    console.log(isSelected);
+    console.log(event);
+  };
+
   return (
     <>
       <Navbar />
@@ -53,7 +61,7 @@ const HomePage = () => {
 
         {/* Avatar */}
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <Cards childList={childList} />
+          <Cards childList={childList} handleChecked= {handleChecked} isSelected= {isSelected} />
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>

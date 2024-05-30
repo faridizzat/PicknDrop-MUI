@@ -1,6 +1,11 @@
 import { Box, Button } from "@mui/material";
+import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
 const ActionButton = () => {
+  const handleDelete = (event) => {
+    console.log(event);
+  };
+
   return (
     <Box
       display={"flex"}
@@ -24,6 +29,18 @@ const ActionButton = () => {
       >
         Drop Off
       </Button>
+      <Button>
+        <DeleteForeverRoundedIcon
+          fontSize="large"
+          className="deleteIcon"
+          sx={{
+            position: "absolute",
+            color: "red",
+          }}
+          onClick={handleDelete}
+
+        />
+      </Button >
       <Button
         variant="contained"
         sx={{
