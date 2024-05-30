@@ -6,6 +6,7 @@ import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
 import ActionButton from "../components/ActionButton";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const generateRandomHex = () => {
   return Math.floor(Math.random() * 16777215).toString(16);
@@ -23,7 +24,7 @@ const generateRandomImage = () => {
   return imagesPath[Math.floor(Math.random() * imagesPath.length)];
 };
 
-const HomePage = () => {
+const HomePage = (props) => {
   const [childList, setChildList] = useState([]);
 
   const handleAddNewChildName = (name) => {
@@ -37,6 +38,8 @@ const HomePage = () => {
     const newChildList = [...childList, newChild];
     setChildList(newChildList);
   };
+
+  const selectedChild = props.SelectedChild;
 
   return (
     <>
@@ -58,7 +61,7 @@ const HomePage = () => {
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <ActionButton />
+          <ActionButton selectedChild={selectedChild} />
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
@@ -71,6 +74,10 @@ const HomePage = () => {
       </Container>
     </>
   );
+};
+
+HomePage.propTypes = {
+  SelectedChild: PropTypes.object,
 };
 
 export default HomePage;
