@@ -1,8 +1,13 @@
 import { Avatar, Box, Typography, Checkbox } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const Cards = (props) => {
   const childList = props.childList;
+  const [updatedChildList, setUpdatedChildList] = useState(childList);
+
+  useEffect(() => {
+    setUpdatedChildList(childList);
+  }, [childList]);
 
   // const [childList, setChildList] = useState([props.childList]);
 
@@ -12,9 +17,22 @@ const Cards = (props) => {
 
     console.log("targetId", targetId);
     console.log("targetChecked", targetChecked);
+
+    const newChildList = updatedChildList.map((child) => {
+      if (child.id === targetId) {
+        return {
+          ...child,
+          isSelected: targetChecked,
+        };
+      } else {
+        return child;
+      }
+    });
+    setUpdatedChildList(newChildList);
   };
 
-  console.log("childList", childList);
+  console.log("childList", props.childList);
+  console.log("updatedChildList", updatedChildList);
 
   return (
     <Box
@@ -23,7 +41,7 @@ const Cards = (props) => {
       flexWrap="wrap"
       justifyContent="center"
     >
-      {childList.map((child) => (
+      {updatedChildList.map((child) => (
         <Box
           display="flex"
           flexDirection="column"
@@ -46,7 +64,7 @@ const Cards = (props) => {
               sx={{
                 width: 100,
                 height: 100,
-                // border: child.isSelected ? "2px solid black" : "none",
+                border: child.isSelected ? "2px solid black" : "none",
               }}
             />
           </label>
