@@ -1,19 +1,20 @@
 import { Avatar, Box, Typography, Checkbox } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
-
 const Cards = (props) => {
   const childList = props.childList;
 
-
+  // const [childList, setChildList] = useState([props.childList]);
 
   const handleChecked = (event) => {
     const targetId = event.target.id;
     const targetChecked = event.target.checked;
 
-    console.log(targetId, targetChecked);
+    console.log("targetId", targetId);
+    console.log("targetChecked", targetChecked);
+  };
 
-  }
+  console.log("childList", childList);
 
   return (
     <Box
@@ -34,9 +35,8 @@ const Cards = (props) => {
             <Checkbox
               id={child.id}
               name={child.name}
-              imgPath={child.imgPath}
               sx={{ display: "none" }}
-              checked={isSelected}
+              // checked={child.isSelected}
               onChange={handleChecked}
             />
 
@@ -46,7 +46,7 @@ const Cards = (props) => {
               sx={{
                 width: 100,
                 height: 100,
-                // border: props.isSelected ? "2px solid black" : "none",
+                // border: child.isSelected ? "2px solid black" : "none",
               }}
             />
           </label>

@@ -31,13 +31,12 @@ const HomePage = () => {
       id: generateRandomHex(),
       name,
       imgPath: generateRandomImage(),
+      isSelected: false,
     };
 
     const newChildList = [...childList, newChild];
     setChildList(newChildList);
   };
-
-
 
   return (
     <>
@@ -55,7 +54,7 @@ const HomePage = () => {
 
         {/* Avatar */}
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <Cards childList={childList}  />
+          <Cards childList={childList} />
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
