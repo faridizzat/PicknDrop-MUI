@@ -5,7 +5,7 @@ import InputChildName from "../components/InputChildName";
 import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
 // import ActionButton from "../components/ActionButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import AvatarChild from "../components/AvatarChild";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
@@ -28,6 +28,8 @@ const generateRandomImage = () => {
 
 const HomePage = (props) => {
   const [childList, setChildList] = useState([]);
+  const [pickedUpChild, setPickedUpChild] = useState([]);
+
 
   const handleAddNewChildName = (name) => {
     const newChild = {
@@ -65,13 +67,38 @@ const HomePage = (props) => {
   };
 
   const handleDropOff = () => {
-    console.log("drop off");
+    let droppedOffChild = []
+
+    childList.map((child) => {
+      if (child.isSelected)
+      {
+        droppedOffChild.push(child)
+      }
+      return child;
+    });
+
+    console.log("droppOff", droppedOffChild);
+    return droppedOffChild;
   };
 
   const handlePickup = () => {
-    const pickedUpChild = childList.find((child) => child.isSelected);
+
+    let pickedUpChild = []
+
+    childList.map((child) => {
+      if (child.isSelected)
+      {
+        pickedUpChild.push(child)
+      }
+      return child;
+    });
+
     console.log("pickedUp", pickedUpChild);
+    return pickedUpChild;
+
+  
   };
+  
 
   return (
     <>
