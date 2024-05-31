@@ -4,7 +4,7 @@ import InputChildName from "../components/InputChildName";
 import Cards from "../components/Cards";
 import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
-import ActionButton from "../components/ActionButton";
+// import ActionButton from "../components/ActionButton";
 import { useState } from "react";
 import PropTypes from "prop-types";
 
@@ -39,12 +39,12 @@ const HomePage = (props) => {
     setChildList(newChildList);
   };
 
-  const [highlightedChildren, setHighlightedChildren] = useState([]);
+  // const [highlightedChildren, setHighlightedChildren] = useState([]);
 
-  const handleSelectedChildren = (selectedChildren) => {
-    const highlightedChildren = selectedChildren;
-    console.log( highlightedChildren, "<<<fromHomePage");
-  };
+  // const handleSelectedChildren = (selectedChildren) => {
+  //   const highlightedChildren = selectedChildren;
+  //   console.log( highlightedChildren, "<<<fromHomePage");
+  // };
 
   return (
     <>
@@ -64,13 +64,12 @@ const HomePage = (props) => {
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
           <Cards
             childList={childList}
-            selectChildren={handleSelectedChildren}
           />
         </Box>
 
-        <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
+        {/* <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
           <ActionButton highlightedChildren={highlightedChildren} />
-        </Box>
+        </Box> */}
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
           <DateToday />
