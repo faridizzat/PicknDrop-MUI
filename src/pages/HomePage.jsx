@@ -39,7 +39,12 @@ const HomePage = (props) => {
     setChildList(newChildList);
   };
 
-  const selectedChild = props.SelectedChild;
+  const [highlightedChildren, setHighlightedChildren] = useState([]);
+
+  const handleSelectedChildren = (selectedChildren) => {
+    const highlightedChildren = selectedChildren;
+    console.log( highlightedChildren, "<<<fromHomePage");
+  };
 
   return (
     <>
@@ -57,11 +62,14 @@ const HomePage = (props) => {
 
         {/* Avatar */}
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <Cards childList={childList} />
+          <Cards
+            childList={childList}
+            selectChildren={handleSelectedChildren}
+          />
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <ActionButton selectedChild={selectedChild} />
+          <ActionButton highlightedChildren={highlightedChildren} />
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
@@ -76,8 +84,6 @@ const HomePage = (props) => {
   );
 };
 
-HomePage.propTypes = {
-  SelectedChild: PropTypes.object,
-};
+HomePage.propTypes = {};
 
 export default HomePage;

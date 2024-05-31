@@ -1,7 +1,21 @@
 import { Box, Button } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 
-const ActionButton = () => {
+const ActionButton = (props) => {
+  const selectedChildren = props.highlightedChildren;
+  
+  const [highlightedChildrenArray, setHighlightedChildrenArray] = useState(selectedChildren);
+  useEffect(() => {
+    setHighlightedChildrenArray(selectedChildren);
+  }, [selectedChildren]);
+  
+  console.log("from AB>>", highlightedChildrenArray);
+  
+
+
+
   const handleDelete = (event) => {
     console.log(event);
   };
@@ -29,6 +43,7 @@ const ActionButton = () => {
       >
         Drop Off
       </Button>
+
       <Button>
         <DeleteForeverRoundedIcon
           fontSize="large"
@@ -38,9 +53,8 @@ const ActionButton = () => {
             color: "red",
           }}
           onClick={handleDelete}
-
         />
-      </Button >
+      </Button>
       <Button
         variant="contained"
         sx={{
@@ -58,6 +72,11 @@ const ActionButton = () => {
       </Button>
     </Box>
   );
+};
+
+ActionButton.propTypes = {
+  highlightedChildren: PropTypes.array,
+  
 };
 
 export default ActionButton;

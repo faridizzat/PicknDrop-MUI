@@ -13,8 +13,6 @@ const Cards = (props) => {
     const targetId = event.target.id;
     const targetChecked = event.target.checked;
 
-    console.log("targetId", targetId, "targetChecked", targetChecked);
-
     const newChildList = updatedChildList.map((child) => {
       if (child.id === targetId) {
         return {
@@ -28,8 +26,11 @@ const Cards = (props) => {
     setUpdatedChildList(newChildList);
   };
   const selectedChildren = updatedChildList.filter((child) => child.isSelected);
+  console.log(selectedChildren, "<<<from Cards");
 
-  props.SelectedChild({ selectedChildren });
+  props.selectChildren (
+    selectedChildren
+  )
 
   return (
     <Box
@@ -77,7 +78,8 @@ const Cards = (props) => {
 
 Cards.propTypes = {
   childList: PropTypes.array,
-  SelectedChild: PropTypes.func,
+  selectChildren: PropTypes.func,
+
 };
 
 export default Cards;
