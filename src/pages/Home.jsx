@@ -5,10 +5,11 @@ import InputChildName from "../components/InputChildName";
 import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
 // import ActionButton from "../components/ActionButton";
-import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import { useState } from "react";
 import AvatarChild from "../components/AvatarChild";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import DialogDropoff from "../components/DialogDropoff";
+import DialogPickup from "../components/DialogPickup";
 
 const generateRandomHex = () => {
   return Math.floor(Math.random() * 16777215).toString(16);
@@ -16,20 +17,37 @@ const generateRandomHex = () => {
 
 const generateRandomImage = () => {
   const imagesPath = [
-    "src/assets/avatar-boy1-svgrepo-com.svg",
-    "src/assets/avatar-boy2-svgrepo-com.svg",
-    "src/assets/avatar-boy-svgrepo-com.svg",
-    "src/assets/avatar-girl1-svgrepo-com.svg",
-    "src/assets/avatar-girl-svgrepo-com.svg",
+    "src/assets/cat-animals-svgrepo-com.svg",
+    "src/assets/duck-animals-svgrepo-com.svg",
+    "src/assets/elephant-animals-svgrepo-com.svg",
+    "src/assets/fish-animals-svgrepo-com.svg",
+    "src/assets/lion-animals-svgrepo-com.svg",
+    "src/assets/macaw-animals-svgrepo-com.svg",
+    "src/assets/owl-animals-svgrepo-com.svg",
+    "src/assets/raccoon-animals-svgrepo-com.svg",
+    "src/assets/rhinoceros-animals-svgrepo-com.svg",
+    "src/assets/sheep-animals-svgrepo-com.svg",
+    "src/assets/tortoise-animals-svgrepo-com.svg",
+    "src/assets/toucan-animals-svgrepo-com.svg",
   ];
 
   return imagesPath[Math.floor(Math.random() * imagesPath.length)];
 };
 
-const HomePage = (props) => {
+const HomePage = () => {
   const [childList, setChildList] = useState([]);
-  const [pickedUpChild, setPickedUpChild] = useState([]);
+  const [pickedUpChildName, setPickedUpChildName] = useState([]);
+  const [droppedOffChildName, setDroppedOffChildName] = useState([]);
 
+  const [dialogDropoff, setDialogDropoff] = useState(false);
+  const toggleDialogDropoff = () => {
+    setDialogDropoff(!dialogDropoff);
+  };
+
+  const [dialogPickup, setDialogPickup] = useState(false);
+  const toggleDialogPickup = () => {
+    setDialogPickup(!dialogPickup);
+  };
 
   const handleAddNewChildName = (name) => {
     const newChild = {
@@ -66,39 +84,23 @@ const HomePage = (props) => {
     setChildList(newChildList);
   };
 
-  const handleDropOff = () => {
-    let droppedOffChild = []
-
-    childList.map((child) => {
-      if (child.isSelected)
-      {
-        droppedOffChild.push(child)
-      }
-      return child;
-    });
-
-    console.log("droppOff", droppedOffChild);
-    return droppedOffChild;
-  };
-
   const handlePickup = () => {
-
-    let pickedUpChild = []
-
-    childList.map((child) => {
-      if (child.isSelected)
-      {
-        pickedUpChild.push(child)
-      }
-      return child;
-    });
-
-    console.log("pickedUp", pickedUpChild);
-    return pickedUpChild;
-
-  
+    const newChildList = childList.filter((child) => child.isSelected);
+    const newChildListName = newChildList.map((child) => child.name);
+    const formattedChildListName = newChildListName.join(", ");
+    setPickedUpChildName(formattedChildListName);
+    toggleDialogPickup();
   };
-  
+  // console.log("pickedUpChildName", pickedUpChildName);
+
+  const handleDropOff = () => {
+    const newChildList = childList.filter((child) => child.isSelected);
+    const newChildListName = newChildList.map((child) => child.name);
+    const formattedChildListName = newChildListName.join(", ");
+    setDroppedOffChildName(formattedChildListName);
+    toggleDialogDropoff();
+  };
+  // console.log("droppedOffChildName", droppedOffChildName);
 
   return (
     <>
@@ -154,6 +156,12 @@ const HomePage = (props) => {
             >
               Drop Off
             </Button>
+            {dialogDropoff && (
+              <DialogDropoff
+                isOpen={toggleDialogDropoff}
+                name={droppedOffChildName}
+              />
+            )}
 
             <Button>
               <DeleteForeverRoundedIcon
@@ -182,6 +190,12 @@ const HomePage = (props) => {
             >
               Pick up
             </Button>
+            {dialogPickup && (
+              <DialogPickup
+                isOpen={toggleDialogPickup}
+                name={pickedUpChildName}
+              />
+            )}
           </Box>
         </Box>
 

@@ -8,7 +8,7 @@ import {
   Button,
 } from "@mui/material";
 
-function DialogPickup(props) {
+function DialogDropoff(props) {
   const handleClose = () => {
     props.isOpen(false);
   };
@@ -22,8 +22,8 @@ function DialogPickup(props) {
       <DialogTitle id="alert-dialog-title">{"Dropoff"}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Dian has been drop off to school. Make sure they are not at the back
-          of the seat!
+          {props.name} has been drop off to school. Make sure they are not at
+          the back of the seat!
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -35,8 +35,9 @@ function DialogPickup(props) {
   );
 }
 
-DialogPickup.propTypes = {
-  isOpen: PropTypes.func.isRequired,
+DialogDropoff.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  name: PropTypes.string,
 };
 
-export default DialogPickup;
+export default DialogDropoff;

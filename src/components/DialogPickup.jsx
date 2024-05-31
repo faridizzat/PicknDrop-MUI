@@ -22,8 +22,8 @@ function DialogPickup(props) {
       <DialogTitle id="alert-dialog-title">{"Pickup"}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
-          Eren & Kai has been pickup. Make sure they are not at the back of the
-          seat!
+          {props.name} has been pickup. Make sure they are not at the back of
+          the seat!
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -36,7 +36,8 @@ function DialogPickup(props) {
 }
 
 DialogPickup.propTypes = {
-  isOpen: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  name: PropTypes.string,
 };
 
 export default DialogPickup;

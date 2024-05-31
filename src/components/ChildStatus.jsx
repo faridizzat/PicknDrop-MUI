@@ -1,36 +1,9 @@
 import { Box, Typography, Avatar } from "@mui/material";
 
 const ChildStatus = () => {
-  const childAtHome = [
-    {
-      id: 1,
-      name: "Eren",
-      imgPath: "src/assets/avatar-boy1-svgrepo-com.svg",
-    },
-    {
-      id: 2,
-      name: "Mikasa",
-      imgPath: "src/assets/avatar-girl-svgrepo-com.svg",
-    },
-    {
-      id: 3,
-      name: "Armin",
-      imgPath: "src/assets/avatar-boy-svgrepo-com.svg",
-    },
-  ];
+  const childAtHome = [];
 
-  const childInSchool = [
-    {
-      id: 4,
-      name: "Reiner",
-      imgPath: "src/assets/avatar-boy2-svgrepo-com.svg",
-    },
-    {
-      id: 5,
-      name: "Annie",
-      imgPath: "src/assets/avatar-girl1-svgrepo-com.svg",
-    },
-  ];
+  const childInSchool = [];
   return (
     <Box
       display="flex"
