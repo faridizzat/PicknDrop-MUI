@@ -1,9 +1,11 @@
 import { Box, Typography, Avatar } from "@mui/material";
+import PropTypes from "prop-types";
 
-const ChildStatus = () => {
-  const childAtHome = [];
+const ChildStatus = (props) => {
+  const childAtHome = props.childAtHome;
 
-  const childInSchool = [];
+  const childInSchool = props.childInSchool;
+
   return (
     <Box
       display="flex"
@@ -115,6 +117,11 @@ const ChildStatus = () => {
       </Box>
     </Box>
   );
+};
+
+ChildStatus.propTypes = {
+  childAtHome: PropTypes.array,
+  childInSchool: PropTypes.array,
 };
 
 export default ChildStatus;

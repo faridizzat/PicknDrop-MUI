@@ -38,6 +38,8 @@ const HomePage = () => {
   const [childList, setChildList] = useState([]);
   const [pickedUpChildName, setPickedUpChildName] = useState([]);
   const [droppedOffChildName, setDroppedOffChildName] = useState([]);
+  const [pickedUpChildList, setPickedUpChildList] = useState([]);
+  const [droppedOffChildList, setDroppedOffChildList] = useState([]);
 
   const [dialogDropoff, setDialogDropoff] = useState(false);
   const toggleDialogDropoff = () => {
@@ -86,6 +88,7 @@ const HomePage = () => {
 
   const handlePickup = () => {
     const newChildList = childList.filter((child) => child.isSelected);
+    setDroppedOffChildList(newChildList);
     const newChildListName = newChildList.map((child) => child.name);
     const formattedChildListName = newChildListName.join(", ");
     setPickedUpChildName(formattedChildListName);
@@ -95,6 +98,7 @@ const HomePage = () => {
 
   const handleDropOff = () => {
     const newChildList = childList.filter((child) => child.isSelected);
+    setPickedUpChildList(newChildList);
     const newChildListName = newChildList.map((child) => child.name);
     const formattedChildListName = newChildListName.join(", ");
     setDroppedOffChildName(formattedChildListName);
@@ -204,7 +208,10 @@ const HomePage = () => {
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <ChildStatus />
+          <ChildStatus
+            childAtHome={pickedUpChildList}
+            childInSchool={droppedOffChildList}
+          />
         </Box>
       </Container>
     </>
