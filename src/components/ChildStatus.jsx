@@ -2,9 +2,21 @@ import { Box, Typography, Avatar } from "@mui/material";
 import PropTypes from "prop-types";
 
 const ChildStatus = (props) => {
-  const childAtHome = props.childAtHome;
+  const childList = props.childList;
 
-  const childInSchool = props.childInSchool;
+  const childAtHomeList = childList.map((child) => {
+    if (child.isAtHome) {
+      return child;
+    }
+  });
+
+  // const childInSchoolList = childList.map((child) => {
+  //   if (!child.isAtHome) {
+  //     return child;
+  //   }
+  // });
+
+  const childInSchoolList = [];
 
   return (
     <Box
@@ -16,8 +28,8 @@ const ChildStatus = (props) => {
     >
       {/* Box 1 */}
       <Box
-        width={"30rem"}
-        height={"15rem"}
+        minWidth={"30rem"}
+        minHeight={"15rem"}
         m={1}
         border={1}
         display="flex"
@@ -42,7 +54,7 @@ const ChildStatus = (props) => {
           flexWrap="wrap"
           justifyContent="center"
         >
-          {childAtHome.map((child) => (
+          {childAtHomeList.map((child) => (
             <Box
               display="flex"
               flexDirection="column"
@@ -93,7 +105,7 @@ const ChildStatus = (props) => {
           flexWrap="wrap"
           justifyContent="center"
         >
-          {childInSchool.map((child) => (
+          {childInSchoolList.map((child) => (
             <Box
               display="flex"
               flexDirection="column"
@@ -120,8 +132,7 @@ const ChildStatus = (props) => {
 };
 
 ChildStatus.propTypes = {
-  childAtHome: PropTypes.array,
-  childInSchool: PropTypes.array,
+  childList: PropTypes.array,
 };
 
 export default ChildStatus;

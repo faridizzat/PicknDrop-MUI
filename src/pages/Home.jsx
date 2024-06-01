@@ -56,6 +56,7 @@ const HomePage = () => {
       id: generateRandomHex(),
       name,
       imgPath: generateRandomImage(),
+      isAtHome: true,
       isSelected: false,
     };
 
@@ -81,6 +82,7 @@ const HomePage = () => {
     setChildList(selectedChildList);
   };
 
+  console.log("childList", childList);
   const handleDelete = () => {
     const newChildList = childList.filter((child) => !child.isSelected);
     setChildList(newChildList);
@@ -94,7 +96,6 @@ const HomePage = () => {
     setPickedUpChildName(formattedChildListName);
     toggleDialogPickup();
   };
-  // console.log("pickedUpChildName", pickedUpChildName);
 
   const handleDropOff = () => {
     const newChildList = childList.filter((child) => child.isSelected);
@@ -104,7 +105,6 @@ const HomePage = () => {
     setDroppedOffChildName(formattedChildListName);
     toggleDialogDropoff();
   };
-  // console.log("droppedOffChildName", droppedOffChildName);
 
   return (
     <>
@@ -208,10 +208,7 @@ const HomePage = () => {
         </Box>
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <ChildStatus
-            childAtHome={pickedUpChildList}
-            childInSchool={droppedOffChildList}
-          />
+          <ChildStatus childList={childList} />
         </Box>
       </Container>
     </>

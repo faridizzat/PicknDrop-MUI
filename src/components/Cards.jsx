@@ -1,4 +1,4 @@
-import { Avatar, Box, Typography, Checkbox, Button, Stack } from "@mui/material";
+import { Avatar, Box, Typography, Checkbox, Button } from "@mui/material";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
 import PropTypes from "prop-types";
@@ -29,8 +29,7 @@ const Cards = (props) => {
   };
   // const selectedChildren = updatedChildList.filter((child) => child.isSelected);
 
-  const handleDelete = (event) => {
-
+  const handleDelete = () => {
     //if isSelected is true, remove the child and update the state
     const newChildList = updatedChildList.filter((child) => !child.isSelected);
     setUpdatedChildList(newChildList);
@@ -39,47 +38,47 @@ const Cards = (props) => {
   return (
     <form onSubmit={handleDelete}>
       <Box display="flex" flexDirection="column">
-      <Box
-        display={"flex"}
-        flexDirection="row"
-        flexWrap="wrap"
-        justifyContent="center"
-      >
-        {updatedChildList.map((child) => (
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            m={2}
-            key={child.id}
-          >
-            <label htmlFor={child.id}>
-              <Checkbox
-                id={child.id}
-                name={child.name}
-                sx={{ display: "none" }}
-                // checked={child.isSelected}
-                onChange={handleChecked}
-              />
+        <Box
+          display={"flex"}
+          flexDirection="row"
+          flexWrap="wrap"
+          justifyContent="center"
+        >
+          {updatedChildList.map((child) => (
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              m={2}
+              key={child.id}
+            >
+              <label htmlFor={child.id}>
+                <Checkbox
+                  id={child.id}
+                  name={child.name}
+                  sx={{ display: "none" }}
+                  // checked={child.isSelected}
+                  onChange={handleChecked}
+                />
 
-              <Avatar
-                alt={child.name}
-                src={child.imgPath}
-                sx={{
-                  width: 100,
-                  height: 100,
-                  border: child.isSelected ? "2px solid black" : "none",
-                }}
-              />
-            </label>
+                <Avatar
+                  alt={child.name}
+                  src={child.imgPath}
+                  sx={{
+                    width: 100,
+                    height: 100,
+                    border: child.isSelected ? "2px solid black" : "none",
+                  }}
+                />
+              </label>
 
-            <Typography variant="h5" p={2}>
-              {child.name}
-            </Typography>
-          </Box>
-        ))}
-      </Box>
-      <Box
+              <Typography variant="h5" p={2}>
+                {child.name}
+              </Typography>
+            </Box>
+          ))}
+        </Box>
+        <Box
           display={"flex"}
           flexDirection="row"
           justifyContent="center"
@@ -130,8 +129,6 @@ const Cards = (props) => {
           </Button>
         </Box>
       </Box>
-
-      
     </form>
   );
 };
