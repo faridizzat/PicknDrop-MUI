@@ -9,17 +9,11 @@ const ChildStatus = (props) => {
   const childInSchoolList = childList.filter((child) => !child.isAtHome);
 
   return (
-    <Box
-      display="flex"
-      flexDirection={"row"}
-      flexWrap={"wrap"}
-      justifyContent="center"
-      alignItems="center"
-    >
+    <>
       {/* Box 1 */}
       <Box
-        minWidth={"30rem"}
-        minHeight={"15rem"}
+        minWidth={"20rem"}
+        minHeight={"5rem"}
         m={1}
         border={1}
         display="flex"
@@ -69,8 +63,8 @@ const ChildStatus = (props) => {
 
       {/*Box 2 */}
       <Box
-        width={"30rem"}
-        height={"15rem"}
+        minWidth={"20rem"}
+        minHeight={"15rem"}
         m={1}
         border={1}
         display="flex"
@@ -117,7 +111,7 @@ const ChildStatus = (props) => {
           ))}
         </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 

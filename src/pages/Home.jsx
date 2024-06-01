@@ -182,7 +182,16 @@ const HomePage = () => {
           <DateToday />
         </Box>
 
-        <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
+        <Box
+          p={2}
+          m={2}
+          display={"flex"}
+          flexDirection={"row"}
+          flexWrap={"wrap"}
+          justifyContent="center"
+          alignItems="center"
+          border={1}
+        >
           <ChildStatus childList={childList} />
         </Box>
       </Container>
