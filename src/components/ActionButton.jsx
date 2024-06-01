@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 const ActionButton = (props) => {
   const childList = props.childList;
 
-  //if there is at least 1 child selected, return true
   const isChildSelected = childList.some((child) => child.isSelected);
   console.log(isChildSelected);
+
   return (
     <Box
       display={"flex"}

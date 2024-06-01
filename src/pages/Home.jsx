@@ -72,7 +72,7 @@ const HomePage = () => {
       setPickedUpChildName(formattedChildListName);
 
       if (!child.isSelected) {
-        return child; // do nothing
+        return child;
       }
 
       return {
@@ -95,7 +95,7 @@ const HomePage = () => {
 
     const newChildList = childList.map((child) => {
       if (!child.isSelected) {
-        return child; // do nothing
+        return child;
       }
 
       return {
