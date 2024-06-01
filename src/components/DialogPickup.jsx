@@ -9,13 +9,10 @@ import {
 } from "@mui/material";
 
 function DialogPickup(props) {
-  const handleClose = () => {
-    props.isOpen(false);
-  };
   return (
     <Dialog
       open={props.isOpen}
-      onClose={handleClose}
+      onClose={props.handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
@@ -27,7 +24,7 @@ function DialogPickup(props) {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} autoFocus>
+        <Button onClick={props.handleClose} autoFocus>
           OK!
         </Button>
       </DialogActions>
@@ -36,8 +33,9 @@ function DialogPickup(props) {
 }
 
 DialogPickup.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
   name: PropTypes.string,
+  handleClose: PropTypes.func,
 };
 
 export default DialogPickup;

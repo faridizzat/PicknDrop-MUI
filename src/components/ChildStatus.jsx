@@ -4,19 +4,9 @@ import PropTypes from "prop-types";
 const ChildStatus = (props) => {
   const childList = props.childList;
 
-  const childAtHomeList = childList.map((child) => {
-    if (child.isAtHome) {
-      return child;
-    }
-  });
+  const childAtHomeList = childList.filter((child) => child.isAtHome);
 
-  // const childInSchoolList = childList.map((child) => {
-  //   if (!child.isAtHome) {
-  //     return child;
-  //   }
-  // });
-
-  const childInSchoolList = [];
+  const childInSchoolList = childList.filter((child) => !child.isAtHome);
 
   return (
     <Box
