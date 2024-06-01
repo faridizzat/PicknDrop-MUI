@@ -1,6 +1,5 @@
-import { Container, Box } from "@mui/material";
+import { Container, Box, Button } from "@mui/material";
 import Navbar from "../components/Navbar";
-import InputChildName from "../components/InputChildName";
 import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
 import ActionButton from "../components/ActionButton";
@@ -10,6 +9,8 @@ import DialogDropoff from "../components/DialogDropoff";
 import DialogPickup from "../components/DialogPickup";
 import generateRandomImage from "../utils/generateRandomImage";
 import generateRandomHex from "../utils/generateRandomHex";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import DialogAddChild from "../components/DialogAddChild";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -17,6 +18,8 @@ const HomePage = () => {
   const [droppedOffChildName, setDroppedOffChildName] = useState([]);
   const [dialogDropoff, setDialogDropoff] = useState(false);
   const [dialogPickup, setDialogPickup] = useState(false);
+  const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
+
   const toggleDialogDropoff = () => {
     setDialogDropoff(!dialogDropoff);
   };
@@ -62,6 +65,12 @@ const HomePage = () => {
 
   const handlePickup = () => {
     const newChildList = childList.map((child) => {
+      const newChildListName = childList
+        .filter((child) => child.isSelected)
+        .map((child) => child.name);
+      const formattedChildListName = newChildListName.join(", ");
+      setPickedUpChildName(formattedChildListName);
+
       if (!child.isSelected) {
         return child; // do nothing
       }
@@ -74,13 +83,16 @@ const HomePage = () => {
     });
     setChildList(newChildList);
 
-    const newChildListName = newChildList.map((child) => child.name);
-    const formattedChildListName = newChildListName.join(", ");
-    setPickedUpChildName(formattedChildListName);
     toggleDialogPickup();
   };
 
   const handleDropOff = () => {
+    const newChildListName = childList
+      .filter((child) => child.isSelected)
+      .map((child) => child.name);
+    const formattedChildListName = newChildListName.join(", ");
+    setDroppedOffChildName(formattedChildListName);
+
     const newChildList = childList.map((child) => {
       if (!child.isSelected) {
         return child; // do nothing
@@ -94,24 +106,21 @@ const HomePage = () => {
     });
     setChildList(newChildList);
 
-    const newChildListName = childList
-      .filter((child) => !child.isAtHome)
-      .map((child) => child.name);
-
-    const formattedChildListName = newChildListName.join(", ");
-    setDroppedOffChildName(formattedChildListName);
     toggleDialogDropoff();
+  };
+
+  const handleClickOpen = () => {
+    setOpenDialogAddChild(true);
+  };
+
+  const handleCloseDialogAddChild = () => {
+    setOpenDialogAddChild(false);
   };
 
   return (
     <>
       <Navbar />
       <Container maxWidth="lg">
-        {/* Input field */}
-        <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
-          <InputChildName addNewChildName={handleAddNewChildName} />
-        </Box>
-
         {/* Avatar */}
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
           {childList.map((child) => {
@@ -126,7 +135,18 @@ const HomePage = () => {
               />
             );
           })}
+          <Button onClick={handleClickOpen}>
+            <AddCircleOutlineIcon sx={{ width: 50, height: 50 }} />
+          </Button>
         </Box>
+
+        {DialogAddChild && (
+          <DialogAddChild
+            isOpen={openDialogAddChild}
+            onClose={handleCloseDialogAddChild}
+            addNewChildname={handleAddNewChildName}
+          />
+        )}
 
         <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
           <ActionButton

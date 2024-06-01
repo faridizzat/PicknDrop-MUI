@@ -6,10 +6,20 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 export default function DialogAddChild(props) {
+  const [newChildName, setNewChildName] = useState("");
   const handleClose = () => {
     props.onClose(false);
+  };
+
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+
+    props.addNewChildname(newChildName);
+
+    handleClose();
   };
 
   return (
@@ -19,14 +29,7 @@ export default function DialogAddChild(props) {
         onClose={props.onClose}
         PaperProps={{
           component: "form",
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            console.log(email);
-            handleClose();
-          },
+          onSubmit: handleOnSubmit,
         }}
       >
         <DialogTitle>Add Child</DialogTitle>
@@ -44,6 +47,7 @@ export default function DialogAddChild(props) {
             type="name"
             fullWidth
             variant="standard"
+            onChange={(event) => setNewChildName(event.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -56,6 +60,7 @@ export default function DialogAddChild(props) {
 }
 
 DialogAddChild.propTypes = {
-  isOpen: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  addNewChildname: PropTypes.func,
 };
