@@ -68,6 +68,10 @@ const Cards = (props) => {
                     width: 100,
                     height: 100,
                     border: child.isSelected ? "2px solid black" : "none",
+                    boxShadow: child.isSelected
+                      ? "0 0 10px rgba(0, 0, 255, 0.5)" // Add a blue glow if selected
+                      : "none", // No glow if not selected
+                    transition: "box-shadow 0.3s ease-in-out", // Add transition for smooth effect
                   }}
                 />
               </label>

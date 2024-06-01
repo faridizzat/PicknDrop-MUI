@@ -122,7 +122,13 @@ const HomePage = () => {
       <Navbar />
       <Container maxWidth="lg">
         {/* Avatar */}
-        <Box p={2} m={2} display={"flex"} justifyContent={"center"}>
+        <Box
+          p={2}
+          m={2}
+          display={"flex"}
+          justifyContent={"center"}
+          flexWrap={"wrap"}
+        >
           {childList.map((child) => {
             return (
               <AvatarChild
@@ -183,7 +189,5 @@ const HomePage = () => {
     </>
   );
 };
-
-HomePage.propTypes = {};
 
 export default HomePage;

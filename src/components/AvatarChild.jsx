@@ -26,6 +26,9 @@ const AvatarChild = (props) => {
             width: 100,
             height: 100,
             border: props.checked ? "2px solid black" : "none",
+            boxShadow: props.checked
+              ? "10px 10px 5px 0px rgba(0,0,0,0.75)" // Add a blue glow if selected
+              : "none", // No glow if not selected
           }}
         />
       </label>
