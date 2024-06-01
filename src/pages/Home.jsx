@@ -190,7 +190,6 @@ const HomePage = () => {
           flexWrap={"wrap"}
           justifyContent="center"
           alignItems="center"
-          border={1}
         >
           <ChildStatus childList={childList} />
         </Box>
