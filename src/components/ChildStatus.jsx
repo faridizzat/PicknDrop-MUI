@@ -13,7 +13,7 @@ const ChildStatus = (props) => {
       {/* Box 1 */}
       <Box
         minWidth={"20rem"}
-        minHeight={"5rem"}
+        minHeight={"15rem"}
         m={1}
         border={1}
         display="flex"

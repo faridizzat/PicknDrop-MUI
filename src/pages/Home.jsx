@@ -159,6 +159,7 @@ const HomePage = () => {
             handleDropOff={handleDropOff}
             handleDelete={handleDelete}
             handlePickup={handlePickup}
+            childList={childList}
           />
         </Box>
 
