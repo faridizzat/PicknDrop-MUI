@@ -9,6 +9,17 @@ import {
 } from "@mui/material";
 
 const LoginPage = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formContent = event.target.elements;
+
+    const email = formContent.email.value;
+    const password = formContent.password.value;
+
+    console.log({ email, password });
+    event.target.reset();
+  };
+
   return (
     <>
       <Navbar />
@@ -51,6 +62,7 @@ const LoginPage = () => {
                 display={"flex"}
                 flexDirection={"column"}
                 p={2}
+                onSubmit={handleSubmit}
               >
                 <InputLabel htmlFor="email"></InputLabel>
                 <TextField

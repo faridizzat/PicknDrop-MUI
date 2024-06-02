@@ -9,6 +9,18 @@ import {
 } from "@mui/material";
 
 const RegisterPage = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formContent = event.target.elements;
+
+    const name = formContent.name.value;
+    const email = formContent.email.value;
+    const password = formContent.password.value;
+
+    console.log({ name, email, password });
+    event.target.reset();
+  };
+
   return (
     <>
       <Navbar />
@@ -48,10 +60,11 @@ const RegisterPage = () => {
               minWidth={"80%"}
             >
               <Box
-                component={"form"}
                 display={"flex"}
                 flexDirection={"column"}
                 p={2}
+                component={"form"}
+                onSubmit={handleSubmit}
               >
                 <InputLabel htmlFor="name"></InputLabel>
                 <TextField
@@ -77,16 +90,6 @@ const RegisterPage = () => {
                   id="password"
                   name="password"
                   label="Passwod"
-                  variant="outlined"
-                  type="password"
-                  sx={{ margin: "0.3rem 0" }}
-                />
-
-                <InputLabel htmlFor="name"></InputLabel>
-                <TextField
-                  id="confirm-password"
-                  name="confirm-password"
-                  label="Confirm Passwod"
                   variant="outlined"
                   type="password"
                   sx={{ margin: "0.3rem 0" }}

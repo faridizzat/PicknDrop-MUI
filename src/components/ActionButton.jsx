@@ -6,7 +6,6 @@ const ActionButton = (props) => {
   const childList = props.childList;
 
   const isChildSelected = childList.some((child) => child.isSelected);
-  console.log(isChildSelected);
 
   return (
     <Box
