@@ -44,6 +44,15 @@ export default function Navbar() {
             >
               Logout
             </Button>
+            <Button
+              color="inherit"
+              sx={{
+                fontSize: "1rem",
+                margin: "0.25rem 0.5rem",
+              }}
+            >
+              Login
+            </Button>
           </Toolbar>
         </Container>
       </AppBar>
