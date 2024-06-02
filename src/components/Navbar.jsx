@@ -38,7 +38,7 @@ export default function Navbar() {
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
                 }}
-                to="/"
+                to="/profile"
               >
                 PROFILE
               </RouterLink>
