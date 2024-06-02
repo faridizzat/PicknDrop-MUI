@@ -13,14 +13,14 @@ const RegisterPage = () => {
     <>
       <Navbar />
 
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Box
           display={"flex"}
-          flexDirection={"row"}
           justifyContent="flex-end"
-          width={"80rem"}
-          height={"fit-content"}
-          sx={{ margin: "10rem auto" }}
+          sx={{
+            margin: { xs: "1rem auto", md: "10rem auto" },
+            flexDirection: { xs: "column", md: "row" },
+          }}
         >
           <Box flex={1} m={1}>
             <img

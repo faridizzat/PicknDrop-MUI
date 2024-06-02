@@ -13,14 +13,14 @@ const LoginPage = () => {
     <>
       <Navbar />
 
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Box
           display={"flex"}
-          flexDirection={"row"}
           justifyContent="flex-end"
-          width={"80rem"}
-          height={"fit-content"}
-          sx={{ margin: "10rem auto" }}
+          sx={{
+            margin: { xs: "1rem auto", md: "10rem auto" },
+            flexDirection: { xs: "column", md: "row" },
+          }}
         >
           <Box flex={1} m={1}>
             <img
@@ -45,7 +45,6 @@ const LoginPage = () => {
               display={"flex"}
               flexDirection={"column"}
               alignContent={"flex-start"}
-              minWidth={"80%"}
             >
               <Box
                 component={"form"}
@@ -66,7 +65,7 @@ const LoginPage = () => {
                 <TextField
                   id="password"
                   name="password"
-                  label="Passwod"
+                  label="Password"
                   variant="outlined"
                   type="password"
                   sx={{ margin: "0.3rem 0" }}
