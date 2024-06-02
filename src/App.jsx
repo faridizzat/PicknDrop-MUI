@@ -1,13 +1,10 @@
-// import HomePage from "./pages/HomePage";
-import RegisterPage from "./pages/RegisterPage";
-
-import LoginPage from "./pages/LoginPage";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/Root";
 
 function App() {
   return (
     <>
-      <RegisterPage />
-      {/* <LoginPage /> */}
+      <RouterProvider router={router} />
     </>
   );
 }
