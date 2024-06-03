@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Container,
@@ -9,6 +10,7 @@ import {
 } from "@mui/material";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const formContent = event.target.elements;
@@ -19,6 +21,8 @@ const RegisterPage = () => {
 
     console.log({ name, email, password });
     event.target.reset();
+
+    navigate("/");
   };
 
   return (
@@ -30,7 +34,7 @@ const RegisterPage = () => {
           display={"flex"}
           justifyContent="flex-end"
           sx={{
-            margin: { xs: "1rem auto", md: "10rem auto" },
+            margin: { xs: "1rem auto", md: "3rem auto" },
             flexDirection: { xs: "column", md: "row" },
           }}
         >

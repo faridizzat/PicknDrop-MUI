@@ -7,8 +7,10 @@ import {
   InputLabel,
   Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const formContent = event.target.elements;
@@ -18,6 +20,8 @@ const LoginPage = () => {
 
     console.log({ email, password });
     event.target.reset();
+
+    navigate("/");
   };
 
   return (
@@ -29,7 +33,7 @@ const LoginPage = () => {
           display={"flex"}
           justifyContent="flex-end"
           sx={{
-            margin: { xs: "1rem auto", md: "10rem auto" },
+            margin: { xs: "1rem auto", md: "3rem auto" },
             flexDirection: { xs: "column", md: "row" },
           }}
         >
