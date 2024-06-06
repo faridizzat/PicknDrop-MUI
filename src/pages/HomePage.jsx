@@ -10,7 +10,7 @@ import DialogPickup from "../components/DialogPickup";
 import generateRandomImage from "../utils/generateRandomImage";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
-import { getChild, addChild } from "../api/child.js";
+import { getChild, addChild, deleteChild } from "../api/child.js";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -19,8 +19,7 @@ const HomePage = () => {
   const [dialogDropoff, setDialogDropoff] = useState(false);
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [isCheckedAll, setIsCheckedAll] = useState([]);
+  const [selectedChild, setSelectedChild] = useState([]);
 
   const getChildListFromApi = async () => {
     const dataFromAPI = await getChild();
@@ -67,9 +66,7 @@ const HomePage = () => {
     const targetId = event.target.id;
     const targetChecked = event.target.checked;
 
-    console.log(targetId, targetChecked);
-
-    const newCheckedAll = isCheckedAll.slice(); // Create a copy of isCheckedAll
+    const newCheckedAll = selectedChild.slice(); // Create a copy of selectedChild
 
     if (targetChecked) {
       newCheckedAll.push(targetId); // Add the ID if the child is checked
@@ -82,33 +79,27 @@ const HomePage = () => {
 
     console.log("NC>>", newCheckedAll);
 
-    setIsCheckedAll(newCheckedAll); // Update isCheckedAll state
+    setSelectedChild(newCheckedAll); // Update isCheckedAll state
   };
 
-  // const selectedChildList = childList.map((child) => {
-  //   if (child.id === targetId) {
-  //     return {
-  //       ...child,
-  //       checked: setIsChecked(targetChecked),
-  //     };
-  //   } else {
-  //     return child;
-  //   }
-  // });
+  const handleDelete = async () => {
+    const ids = selectedChild;
 
-  // if (targetChecked) {
-  //   childList.forEach((child) => {
-  //     isCheckedAll.push(child.id);
-  //   });
-  // } else {
-  //   isCheckedAll.splice(0, isCheckedAll.length);
-  // }
-  // setIsCheckedAll(isCheckedAll);
+    console.log("selectedChild Before>>", selectedChild);
 
-  const handleDelete = () => {
-    const newChildList = childList.filter((child) => !child.isSelected);
-    setChildList(newChildList);
+    await deleteChild(ids);
+
+    //reset childList
+    getChildListFromApi();
+
+    //set selected child empty again
+    setSelectedChild([]);
+
+    // const newChildList = childList.filter((child) => !child.isSelected);
+    // setChildList(newChildList);
   };
+
+  console.log("selectedChild After>>", selectedChild);
 
   const handlePickup = () => {
     const newChildList = childList.map((child) => {

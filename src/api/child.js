@@ -56,3 +56,23 @@ export const updateChild = async (is_selected, at_home, id) => {
     console.log(error);
   }
 };
+
+export const deleteChild = async (id) => {
+  try {
+    const token = window.localStorage.getItem("token");
+    const response = await fetch(`http://localhost:3000/children`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
