@@ -8,10 +8,11 @@ import {
   InputLabel,
   Button,
 } from "@mui/material";
+import { registerUser } from "../api/auth.js";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formContent = event.target.elements;
 
@@ -20,9 +21,22 @@ const RegisterPage = () => {
     const password = formContent.password.value;
 
     console.log({ name, email, password });
+
+    // Call API untuk register sini
+    const data = await registerUser({
+      name,
+      email,
+      password,
+    });
+
+    const token = data.token;
+
+    //save token
+    if (token) window.localStorage.setItem("token", token);
+
     event.target.reset();
 
-    navigate("/");
+    if (token) navigate("/");
   };
 
   return (
