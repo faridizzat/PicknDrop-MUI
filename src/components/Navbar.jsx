@@ -9,6 +9,11 @@ import { isAuthenticated } from "../utils/isAuthenticated";
 export default function Navbar() {
   const isAuth = isAuthenticated();
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "#Ffcc00" }}>
@@ -24,7 +29,7 @@ export default function Navbar() {
                     fontWeight: "bold",
                     fontFamily: "Roboto, sans-serif",
                   }}
-                  to="/"
+                  to={isAuth ? "/home" : "/"}
                 >
                   PicknDrop
                 </RouterLink>
@@ -45,7 +50,7 @@ export default function Navbar() {
                 PROFILE
               </RouterLink>
             </Button>
-            <Button>
+            <Button onClick={handleLogout}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -55,7 +60,7 @@ export default function Navbar() {
                   margin: "0.25rem 0.5rem",
                   display: isAuth ? "block" : "none",
                 }}
-                to="/login"
+                to="/"
               >
                 LOGOUT
               </RouterLink>
@@ -86,7 +91,7 @@ export default function Navbar() {
                   margin: "0.25rem 0.5rem",
                   display: isAuth ? "none" : "block",
                 }}
-                to="/login"
+                to="/"
               >
                 LOGIN
               </RouterLink>

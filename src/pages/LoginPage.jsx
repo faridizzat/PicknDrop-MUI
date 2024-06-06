@@ -12,14 +12,13 @@ import { loginUser } from "../api/auth.js";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formContent = event.target.elements;
 
     const email = formContent.email.value;
     const password = formContent.password.value;
-
-    console.log({ email, password });
 
     const data = await loginUser({ email, password });
 
@@ -28,7 +27,12 @@ const LoginPage = () => {
 
     event.target.reset();
 
-    navigate("/");
+    if (!token) {
+      alert("Login Failed");
+      return;
+    }
+
+    navigate("/home");
   };
 
   return (
