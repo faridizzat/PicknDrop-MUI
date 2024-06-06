@@ -41,7 +41,7 @@ const AvatarChild = (props) => {
 };
 
 AvatarChild.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number || PropTypes.string,
   name: PropTypes.string,
   imgPath: PropTypes.string,
   checked: PropTypes.bool,

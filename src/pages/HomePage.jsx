@@ -3,14 +3,14 @@ import Navbar from "../components/Navbar";
 import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
 import ActionButton from "../components/ActionButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AvatarChild from "../components/AvatarChild";
 import DialogDropoff from "../components/DialogDropoff";
 import DialogPickup from "../components/DialogPickup";
 import generateRandomImage from "../utils/generateRandomImage";
-import generateRandomHex from "../utils/generateRandomHex";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
+import { getChild, addChild } from "../api/child.js";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -20,6 +20,17 @@ const HomePage = () => {
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
 
+  const getChildListFromApi = async () => {
+    const dataFromAPI = await getChild();
+    const childList = dataFromAPI.data;
+    setChildList(childList);
+  };
+
+  useEffect(() => {
+    getChildListFromApi();
+  }, []);
+
+  console.log(childList);
   const toggleDialogDropoff = () => {
     setDialogDropoff(!dialogDropoff);
   };
@@ -28,14 +39,20 @@ const HomePage = () => {
     setDialogPickup(!dialogPickup);
   };
 
-  const handleAddNewChildName = (name) => {
+  const handleAddNewChildName = async (name) => {
+    const data = await addChild(name);
+    console.log("from HP>>", data);
+
     const newChild = {
-      id: generateRandomHex(),
-      name,
+      id: data.id,
+      name: data.name,
       imgPath: generateRandomImage(),
       isAtHome: true,
       isSelected: false,
     };
+
+    //reset childList
+    getChildListFromApi();
 
     const newChildList = [...childList, newChild];
     setChildList(newChildList);
