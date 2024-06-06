@@ -4,9 +4,10 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Container } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { isAuthenticated } from "../utils/isAuthenticated";
 
 export default function Navbar() {
-  // const isAuthenticated = false;
+  const isAuth = isAuthenticated();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -37,6 +38,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
+                  display: isAuth ? "block" : "none",
                 }}
                 to="/profile"
               >
@@ -51,6 +53,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
+                  display: isAuth ? "block" : "none",
                 }}
                 to="/login"
               >
@@ -65,7 +68,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  // display: isAuthenticated ? "block" : "none",
+                  display: isAuth ? "none" : "block",
                 }}
                 to="/register"
               >
@@ -81,7 +84,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  // display: isAuthenticated ? "block" : "none",
+                  display: isAuth ? "none" : "block",
                 }}
                 to="/login"
               >

@@ -8,10 +8,11 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../api/auth.js";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formContent = event.target.elements;
 
@@ -19,6 +20,12 @@ const LoginPage = () => {
     const password = formContent.password.value;
 
     console.log({ email, password });
+
+    const data = await loginUser({ email, password });
+
+    const token = data.token;
+    if (token) window.localStorage.setItem("token", token);
+
     event.target.reset();
 
     navigate("/");
