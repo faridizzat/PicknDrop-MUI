@@ -19,11 +19,17 @@ const HomePage = () => {
   const [dialogDropoff, setDialogDropoff] = useState(false);
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedAll, setIsCheckedAll] = useState([]);
 
   const getChildListFromApi = async () => {
     const dataFromAPI = await getChild();
     const childList = dataFromAPI.data;
-    setChildList(childList);
+    //if childList in not empty array, setchildlist
+    if (childList.length > 0) {
+      setChildList(childList);
+    }
+    return;
   };
 
   useEffect(() => {
@@ -41,13 +47,12 @@ const HomePage = () => {
 
   const handleAddNewChildName = async (name) => {
     const data = await addChild(name);
-    console.log("from HP>>", data);
 
     const newChild = {
       id: data.id,
       name: data.name,
       imgPath: generateRandomImage(),
-      isAtHome: true,
+      isAtHome: data.at_home,
       isSelected: false,
     };
 
@@ -62,18 +67,43 @@ const HomePage = () => {
     const targetId = event.target.id;
     const targetChecked = event.target.checked;
 
-    const selectedChildList = childList.map((child) => {
-      if (child.id === targetId) {
-        return {
-          ...child,
-          isSelected: targetChecked,
-        };
-      } else {
-        return child;
+    console.log(targetId, targetChecked);
+
+    const newCheckedAll = isCheckedAll.slice(); // Create a copy of isCheckedAll
+
+    if (targetChecked) {
+      newCheckedAll.push(targetId); // Add the ID if the child is checked
+    } else {
+      const index = newCheckedAll.indexOf(targetId);
+      if (index !== -1) {
+        newCheckedAll.splice(index, 1); // Remove the ID if the child is unchecked
       }
-    });
-    setChildList(selectedChildList);
+    }
+
+    console.log("NC>>", newCheckedAll);
+
+    setIsCheckedAll(newCheckedAll); // Update isCheckedAll state
   };
+
+  // const selectedChildList = childList.map((child) => {
+  //   if (child.id === targetId) {
+  //     return {
+  //       ...child,
+  //       checked: setIsChecked(targetChecked),
+  //     };
+  //   } else {
+  //     return child;
+  //   }
+  // });
+
+  // if (targetChecked) {
+  //   childList.forEach((child) => {
+  //     isCheckedAll.push(child.id);
+  //   });
+  // } else {
+  //   isCheckedAll.splice(0, isCheckedAll.length);
+  // }
+  // setIsCheckedAll(isCheckedAll);
 
   const handleDelete = () => {
     const newChildList = childList.filter((child) => !child.isSelected);
@@ -153,7 +183,7 @@ const HomePage = () => {
                 id={child.id}
                 name={child.name}
                 imgPath={child.imgPath}
-                checked={child.isSelected}
+                checked={child.isChecked}
                 toggleSelect={handleChecked}
               />
             );

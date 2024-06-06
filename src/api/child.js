@@ -35,3 +35,24 @@ export const addChild = async (name) => {
     console.log(error);
   }
 };
+
+export const updateChild = async (is_selected, at_home, id) => {
+  try {
+    const token = window.localStorage.getItem("token");
+    const response = await fetch(`http://localhost:3000/children/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        at_home: at_home,
+        id: id,
+      }),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
