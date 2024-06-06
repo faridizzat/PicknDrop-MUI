@@ -4,9 +4,9 @@ import PropTypes from "prop-types";
 const ChildStatus = (props) => {
   const childList = props.childList;
 
-  const childAtHomeList = childList.filter((child) => child.isAtHome);
+  const childAtHomeList = childList.filter((child) => child.at_home);
 
-  const childInSchoolList = childList.filter((child) => !child.isAtHome);
+  const childInSchoolList = childList.filter((child) => !child.at_home);
 
   return (
     <>

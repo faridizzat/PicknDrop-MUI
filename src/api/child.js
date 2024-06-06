@@ -36,10 +36,10 @@ export const addChild = async (name) => {
   }
 };
 
-export const updateChild = async (is_selected, at_home, id) => {
+export const updateChild = async (at_home, id) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`http://localhost:3000/children/${id}`, {
+    const response = await fetch(`http://localhost:3000/children`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

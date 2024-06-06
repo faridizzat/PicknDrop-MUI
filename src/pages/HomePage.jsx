@@ -10,7 +10,7 @@ import DialogPickup from "../components/DialogPickup";
 import generateRandomImage from "../utils/generateRandomImage";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
-import { getChild, addChild, deleteChild } from "../api/child.js";
+import { getChild, addChild, deleteChild, updateChild } from "../api/child.js";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -36,6 +36,12 @@ const HomePage = () => {
   }, []);
 
   console.log(childList);
+
+  // const isChildSelected = (id) => {
+  //   // Check if selectedChild is included in childList
+  //   return childList.some((child) => child.id === id);
+  // };
+
   const toggleDialogDropoff = () => {
     setDialogDropoff(!dialogDropoff);
   };
@@ -76,16 +82,11 @@ const HomePage = () => {
         newCheckedAll.splice(index, 1); // Remove the ID if the child is unchecked
       }
     }
-
-    console.log("NC>>", newCheckedAll);
-
     setSelectedChild(newCheckedAll); // Update isCheckedAll state
   };
 
   const handleDelete = async () => {
     const ids = selectedChild;
-
-    console.log("selectedChild Before>>", selectedChild);
 
     await deleteChild(ids);
 
@@ -94,57 +95,36 @@ const HomePage = () => {
 
     //set selected child empty again
     setSelectedChild([]);
-
-    // const newChildList = childList.filter((child) => !child.isSelected);
-    // setChildList(newChildList);
   };
 
-  console.log("selectedChild After>>", selectedChild);
+  const handlePickup = async () => {
+    const atHome = true;
+    const ids = selectedChild;
 
-  const handlePickup = () => {
-    const newChildList = childList.map((child) => {
-      const newChildListName = childList
-        .filter((child) => child.isSelected)
-        .map((child) => child.name);
-      const formattedChildListName = newChildListName.join(", ");
-      setPickedUpChildName(formattedChildListName);
+    await updateChild(atHome, ids);
 
-      if (!child.isSelected) {
-        return child;
-      }
+    //reset childList
+    getChildListFromApi();
 
-      return {
-        ...child,
-        isSelected: false,
-        isAtHome: true,
-      };
-    });
-    setChildList(newChildList);
+    //set selected child empty again
+    setSelectedChild([]);
 
-    toggleDialogPickup();
+    // toggleDialogPickup();
   };
 
-  const handleDropOff = () => {
-    const newChildListName = childList
-      .filter((child) => child.isSelected)
-      .map((child) => child.name);
-    const formattedChildListName = newChildListName.join(", ");
-    setDroppedOffChildName(formattedChildListName);
+  const handleDropOff = async () => {
+    const atHome = false;
+    const ids = selectedChild;
 
-    const newChildList = childList.map((child) => {
-      if (!child.isSelected) {
-        return child;
-      }
+    await updateChild(atHome, ids);
 
-      return {
-        ...child,
-        isSelected: false,
-        isAtHome: false,
-      };
-    });
-    setChildList(newChildList);
+    //reset childList
+    getChildListFromApi();
 
-    toggleDialogDropoff();
+    //set selected child empty again
+    setSelectedChild([]);
+
+    // toggleDialogDropoff();
   };
 
   const handleClickOpen = () => {
@@ -174,7 +154,7 @@ const HomePage = () => {
                 id={child.id}
                 name={child.name}
                 imgPath={child.imgPath}
-                checked={child.isChecked}
+                // checked={isChildSelected(child.id)}
                 toggleSelect={handleChecked}
               />
             );
@@ -197,7 +177,7 @@ const HomePage = () => {
             handleDropOff={handleDropOff}
             handleDelete={handleDelete}
             handlePickup={handlePickup}
-            childList={childList}
+            childList={selectedChild}
           />
         </Box>
 

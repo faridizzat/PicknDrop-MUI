@@ -3,9 +3,18 @@ import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import PropTypes from "prop-types";
 
 const ActionButton = (props) => {
-  const childList = props.childList;
+  const selectedChild = props.childList;
 
-  const isChildSelected = childList.some((child) => child.isSelected);
+  console.log("CL from AB", selectedChild);
+  console.log(selectedChild.length);
+
+  const isChildSelected = () => {
+    if (selectedChild.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <Box
