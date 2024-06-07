@@ -11,6 +11,7 @@ import generateRandomImage from "../utils/generateRandomImage";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
 import { getChild, addChild, deleteChild, updateChild } from "../api/child.js";
+import "../index.css";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -20,6 +21,8 @@ const HomePage = () => {
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
   const [selectedChild, setSelectedChild] = useState([]);
+  const [selectedChildList, setSelectedChildList] = useState([]);
+  const [isChildSelected, setIsChildSelected] = useState(false);
 
   const getChildListFromApi = async () => {
     const dataFromAPI = await getChild();
@@ -34,8 +37,6 @@ const HomePage = () => {
   useEffect(() => {
     getChildListFromApi();
   }, []);
-
-  console.log(childList);
 
   // const isChildSelected = (id) => {
   //   // Check if selectedChild is included in childList
@@ -135,6 +136,14 @@ const HomePage = () => {
     setOpenDialogAddChild(false);
   };
 
+  const checkSelectChild = (id) => {
+    if (selectedChildList.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -154,8 +163,8 @@ const HomePage = () => {
                 id={child.id}
                 name={child.name}
                 imgPath={child.imgPath}
-                // checked={isChildSelected(child.id)}
                 toggleSelect={handleChecked}
+                checked={isChildSelected}
               />
             );
           })}

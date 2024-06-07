@@ -5,9 +5,6 @@ import PropTypes from "prop-types";
 const ActionButton = (props) => {
   const selectedChild = props.childList;
 
-  console.log("CL from AB", selectedChild);
-  console.log(selectedChild.length);
-
   const isChildSelected = () => {
     if (selectedChild.length > 0) {
       return true;
@@ -37,7 +34,7 @@ const ActionButton = (props) => {
           borderRadius: "2rem",
         }}
         onClick={props.handleDropOff}
-        disabled={!isChildSelected}
+        disabled={!isChildSelected()}
       >
         Drop Off
       </Button>
@@ -51,7 +48,7 @@ const ActionButton = (props) => {
             color: "red",
           }}
           onClick={props.handleDelete}
-          disabled={!isChildSelected}
+          disabled={!isChildSelected()}
         />
       </Button>
       <Button
@@ -67,7 +64,7 @@ const ActionButton = (props) => {
           borderRadius: "2rem",
         }}
         onClick={props.handlePickup}
-        disabled={!isChildSelected}
+        disabled={!isChildSelected()}
       >
         Pick up
       </Button>

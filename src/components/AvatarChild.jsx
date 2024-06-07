@@ -1,5 +1,6 @@
 import { Avatar, Box, Typography, Checkbox } from "@mui/material";
 import PropTypes from "prop-types";
+import "../index.css";
 
 const AvatarChild = (props) => {
   return (
@@ -14,8 +15,7 @@ const AvatarChild = (props) => {
         <Checkbox
           id={props.id}
           name={props.name}
-          sx={{ display: "none" }}
-          checked={props.checked}
+          // sx={{ display: "none" }}
           onChange={props.toggleSelect}
         />
 
