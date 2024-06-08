@@ -21,8 +21,7 @@ const HomePage = () => {
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
   const [selectedChild, setSelectedChild] = useState([]);
-  const [selectedChildList, setSelectedChildList] = useState([]);
-  const [isChildSelected, setIsChildSelected] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
   const getChildListFromApi = async () => {
     const dataFromAPI = await getChild();
@@ -30,6 +29,7 @@ const HomePage = () => {
     //if childList in not empty array, setchildlist
     if (childList.length > 0) {
       setChildList(childList);
+      return;
     }
     return;
   };
@@ -37,6 +37,8 @@ const HomePage = () => {
   useEffect(() => {
     getChildListFromApi();
   }, []);
+
+  console.log("CL before", childList);
 
   // const isChildSelected = (id) => {
   //   // Check if selectedChild is included in childList
@@ -57,9 +59,7 @@ const HomePage = () => {
     const newChild = {
       id: data.id,
       name: data.name,
-      imgPath: generateRandomImage(),
       isAtHome: data.at_home,
-      isSelected: false,
     };
 
     //reset childList
@@ -71,23 +71,32 @@ const HomePage = () => {
 
   const handleChecked = (event) => {
     const targetId = event.target.id;
+    const targetName = event.target.name;
     const targetChecked = event.target.checked;
 
-    const newCheckedAll = selectedChild.slice(); // Create a copy of selectedChild
+    console.log({ targetId, targetChecked, targetName });
+
+    const child = {
+      id: targetId,
+      name: targetName,
+    };
 
     if (targetChecked) {
-      newCheckedAll.push(targetId); // Add the ID if the child is checked
+      setSelectedChild((prevChild) => [...prevChild, child]);
     } else {
-      const index = newCheckedAll.indexOf(targetId);
-      if (index !== -1) {
-        newCheckedAll.splice(index, 1); // Remove the ID if the child is unchecked
-      }
+      setSelectedChild((prevChild) => {
+        return [...prevChild.filter((child) => child.id !== targetId)];
+      });
     }
-    setSelectedChild(newCheckedAll); // Update isCheckedAll state
   };
 
+  console.log("CL after", selectedChild);
+
   const handleDelete = async () => {
-    const ids = selectedChild;
+    //map selected child to name array
+    const ids = selectedChild.map((child) => child.id);
+
+    console.log("ids", ids);
 
     await deleteChild(ids);
 
@@ -96,12 +105,18 @@ const HomePage = () => {
 
     //set selected child empty again
     setSelectedChild([]);
+
+    // setIsChecked(false);
   };
 
   const handlePickup = async () => {
     const atHome = true;
-    const ids = selectedChild;
+    // const ids = selectedChild;
 
+    const ids = selectedChild.map((child) => child.id);
+    const list = selectedChild.map((child) => child.name);
+    const formattedList = list.join(", ");
+    setPickedUpChildName(formattedList);
     await updateChild(atHome, ids);
 
     //reset childList
@@ -110,12 +125,18 @@ const HomePage = () => {
     //set selected child empty again
     setSelectedChild([]);
 
-    // toggleDialogPickup();
+    toggleDialogPickup();
+
+    // setIsChecked(false);
   };
 
   const handleDropOff = async () => {
     const atHome = false;
-    const ids = selectedChild;
+    const ids = selectedChild.map((child) => child.id);
+    const list = selectedChild.map((child) => child.name);
+    const formattedList = list.join(", ");
+    setDroppedOffChildName(formattedList);
+    console.log("ids", ids);
 
     await updateChild(atHome, ids);
 
@@ -125,7 +146,8 @@ const HomePage = () => {
     //set selected child empty again
     setSelectedChild([]);
 
-    // toggleDialogDropoff();
+    toggleDialogDropoff();
+    // setIsChecked(false);
   };
 
   const handleClickOpen = () => {
@@ -136,13 +158,11 @@ const HomePage = () => {
     setOpenDialogAddChild(false);
   };
 
-  const checkSelectChild = (id) => {
-    if (selectedChildList.includes(id)) {
-      return true;
-    } else {
-      return false;
-    }
+  const checkSelectChild = (data) => {
+    return selectedChild.includes(data);
   };
+
+  console.log(checkSelectChild("7"));
 
   return (
     <>
@@ -162,9 +182,9 @@ const HomePage = () => {
                 key={child.id}
                 id={child.id}
                 name={child.name}
-                imgPath={child.imgPath}
                 toggleSelect={handleChecked}
-                checked={isChildSelected}
+                selected={checkSelectChild(child.id)}
+                // checked={isChecked}
               />
             );
           })}
