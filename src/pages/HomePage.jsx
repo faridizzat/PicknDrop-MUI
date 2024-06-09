@@ -38,13 +38,6 @@ const HomePage = () => {
     getChildListFromApi();
   }, []);
 
-  console.log("CL before", childList);
-
-  // const isChildSelected = (id) => {
-  //   // Check if selectedChild is included in childList
-  //   return childList.some((child) => child.id === id);
-  // };
-
   const toggleDialogDropoff = () => {
     setDialogDropoff(!dialogDropoff);
   };
@@ -78,36 +71,7 @@ const HomePage = () => {
     );
   };
 
-  console.log(selectedChild);
-  console.log("CL after", selectedChild);
-
-  // const handleChecked = (event) => {
-  //   const targetId = event.target.id;
-  //   const targetName = event.target.name;
-  //   const targetChecked = event.target.checked;
-
-  //   console.log({ targetId, targetChecked, targetName });
-
-  //   const child = {
-  //     id: targetId,
-  //     name: targetName,
-  //   };
-
-  //   if (targetChecked) {
-  //     setSelectedChild((prevChild) => [...prevChild, child]);
-  //   } else {
-  //     setSelectedChild((prevChild) => {
-  //       return [...prevChild.filter((child) => child.id !== targetId)];
-  //     });
-  //   }
-  // };
-
-  // console.log("CL after", selectedChild);
-
   const handleDelete = async () => {
-    //map selected child to name array
-    // const ids = selectedChild.map((child) => child.id);
-
     await deleteChild(selectedChild);
 
     //reset childList
@@ -121,16 +85,11 @@ const HomePage = () => {
 
   const handlePickup = async () => {
     const atHome = true;
-    // const ids = selectedChild;
-
-    // const ids = selectedChild.map((child) => child.id);
-    // const list = selectedChild.map((child) => child.name);
 
     // Find the selected children from the childList
     const selectedChildren = childList.filter((child) =>
       selectedChild.includes(child.id)
     );
-    console.log("selectedChildren", selectedChildren);
 
     // Extract the names of the selected children
     const selectedChildNames = selectedChildren.map((child) => child.name);
@@ -146,20 +105,14 @@ const HomePage = () => {
     setSelectedChild([]);
 
     toggleDialogPickup();
-
-    // setIsChecked(false);
   };
 
   const handleDropOff = async () => {
     const atHome = false;
-    // const ids = selectedChild.map((child) => child.id);
-    // const list = selectedChild.map((child) => child.name);
-
     // Find the selected children from the childList
     const selectedChildren = childList.filter((child) =>
       selectedChild.includes(child.id)
     );
-    console.log("selectedChildren", selectedChildren);
 
     // Extract the names of the selected children
     const selectedChildNames = selectedChildren.map((child) => child.name);
@@ -185,12 +138,6 @@ const HomePage = () => {
   const handleCloseDialogAddChild = () => {
     setOpenDialogAddChild(false);
   };
-
-  const checkSelectChild = (data) => {
-    return selectedChild.includes(data);
-  };
-
-  console.log(checkSelectChild("7"));
 
   return (
     <>
