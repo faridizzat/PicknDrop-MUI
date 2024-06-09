@@ -36,7 +36,7 @@ const RegisterPage = () => {
 
     event.target.reset();
 
-    if (token) navigate("/home");
+    if (token) navigate("/");
   };
 
   return (

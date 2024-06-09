@@ -10,7 +10,6 @@ export const getChild = async () => {
       },
     });
     const data = await response.json();
-    console.log("RES", data);
 
     return data;
   } catch (error) {

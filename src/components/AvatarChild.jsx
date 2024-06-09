@@ -1,16 +1,9 @@
 import { Avatar, Box, Typography, Checkbox } from "@mui/material";
 import PropTypes from "prop-types";
-import "../index.css";
 
 const AvatarChild = (props) => {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      m={2}
-      key={props.id}
-    >
+    <Box display="flex" flexDirection="column" alignItems="center" m={2}>
       <label htmlFor={props.id}>
         <Checkbox
           id={props.id}

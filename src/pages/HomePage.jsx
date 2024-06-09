@@ -11,7 +11,6 @@ import generateRandomImage from "../utils/generateRandomImage";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
 import { getChild, addChild, deleteChild, updateChild } from "../api/child.js";
-import "../index.css";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -21,7 +20,6 @@ const HomePage = () => {
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
   const [selectedChild, setSelectedChild] = useState([]);
-  // const [isChecked, setIsChecked] = useState(false);
 
   const getChildListFromApi = async () => {
     const dataFromAPI = await getChild();
@@ -46,7 +44,7 @@ const HomePage = () => {
     setDialogPickup(!dialogPickup);
   };
 
-  const handleAddNewChildName = async (name, imgPath) => {
+  const handleAddNewChildName = async (name) => {
     const img = generateRandomImage();
     const data = await addChild(name, img);
 
@@ -82,8 +80,6 @@ const HomePage = () => {
 
     //set selected child empty again
     setSelectedChild([]);
-
-    // setIsChecked(false);
   };
 
   const handlePickup = async () => {
@@ -141,8 +137,6 @@ const HomePage = () => {
   const handleCloseDialogAddChild = () => {
     setOpenDialogAddChild(false);
   };
-
-  console.log(childList);
 
   return (
     <>

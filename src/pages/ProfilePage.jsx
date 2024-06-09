@@ -8,18 +8,34 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getUserById } from "../api/user";
 
 const ProfilePage = () => {
-  const [name, setName] = useState("Farid");
-  const [email, setEmail] = useState("farid@me.com");
-  const [password, setPassword] = useState("123456");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [isReadOnly, setIsReadOnly] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const handleEdit = () => {
     setEditMode(!editMode);
     setIsReadOnly(!isReadOnly);
   };
+
+  const getUser = async () => {
+    const userFromAPI = await getUserById();
+    const data = userFromAPI.data;
+    const currentUserName = data.name;
+    const currentUserEmail = data.email;
+    setName(currentUserName);
+    setEmail(currentUserEmail);
+    return;
+  };
+
+  // console.log(name, email);
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -58,15 +74,17 @@ const ProfilePage = () => {
                 Name
               </Typography>
               <Box display={"flex"} flexDirection={"row"}>
-                <TextField
-                  id="name"
-                  name="name"
-                  defaultValue={name}
-                  InputProps={{
-                    readOnly: isReadOnly,
-                  }}
-                  variant="standard"
-                />
+                {name && (
+                  <TextField
+                    id="name"
+                    name="name"
+                    defaultValue={name}
+                    InputProps={{
+                      readOnly: isReadOnly,
+                    }}
+                    variant="standard"
+                  />
+                )}
 
                 <Button>
                   <EditIcon
@@ -89,15 +107,17 @@ const ProfilePage = () => {
                 Email
               </Typography>
               <Box display={"flex"} flexDirection={"row"}>
-                <TextField
-                  id="email"
-                  name="email"
-                  defaultValue={email}
-                  InputProps={{
-                    readOnly: isReadOnly,
-                  }}
-                  variant="standard"
-                />
+                {email && (
+                  <TextField
+                    id="email"
+                    name="email"
+                    defaultValue={email}
+                    InputProps={{
+                      readOnly: isReadOnly,
+                    }}
+                    variant="standard"
+                  />
+                )}
                 <Button>
                   <EditIcon
                     onClick={handleEdit}
@@ -109,7 +129,7 @@ const ProfilePage = () => {
               </Box>
             </Box>
 
-            <Box
+            {/* <Box
               m={1}
               display={"flex"}
               flexDirection={"row"}
@@ -138,7 +158,7 @@ const ProfilePage = () => {
                   />
                 </Button>
               </Box>
-            </Box>
+            </Box> */}
             <Button
               variant="contained"
               sx={{ margin: "0.3rem 0" }}

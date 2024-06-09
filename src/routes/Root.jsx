@@ -7,11 +7,11 @@ import TestPage from "../pages/TestPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/login",
     element: <LoginPage />,
   },
   {
-    path: "/home",
+    path: "/",
     element: <HomePage />,
   },
   {
