@@ -11,19 +11,13 @@ const AvatarChild = (props) => {
       m={2}
       key={props.id}
     >
-      <label
-        htmlFor={props.id}
-        style={{
-          border: props.selected ? "2px solid red" : "none",
-        }}
-      >
+      <label htmlFor={props.id}>
         <Checkbox
           id={props.id}
           name={props.name}
           value={props.id}
-          // sx={{ display: "none" }}
+          sx={{ display: "none" }}
           onChange={props.toggleSelect}
-          selected={props.selected}
           checked={props.checked}
         />
 
@@ -33,8 +27,8 @@ const AvatarChild = (props) => {
           sx={{
             width: 100,
             height: 100,
-            border: props.selected ? "2px solid black" : "none",
-            boxShadow: props.selected
+            border: props.checked ? "2px solid black" : "none",
+            boxShadow: props.checked
               ? "10px 10px 5px 0px rgba(0,0,0,0.75)"
               : "none",
 
@@ -56,7 +50,6 @@ AvatarChild.propTypes = {
   id: PropTypes.number || PropTypes.string,
   name: PropTypes.string,
   imgPath: PropTypes.string,
-  selected: PropTypes.bool,
   toggleSelect: PropTypes.func,
   checked: PropTypes.bool,
 };

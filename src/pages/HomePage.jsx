@@ -69,36 +69,46 @@ const HomePage = () => {
     setChildList(newChildList);
   };
 
-  const handleChecked = (event) => {
-    const targetId = event.target.id;
-    const targetName = event.target.name;
-    const targetChecked = event.target.checked;
-
-    console.log({ targetId, targetChecked, targetName });
-
-    const child = {
-      id: targetId,
-      name: targetName,
-    };
-
-    if (targetChecked) {
-      setSelectedChild((prevChild) => [...prevChild, child]);
-    } else {
-      setSelectedChild((prevChild) => {
-        return [...prevChild.filter((child) => child.id !== targetId)];
-      });
-    }
+  const handleChecked = (childId) => () => {
+    setSelectedChild(
+      (prevIds) =>
+        prevIds.includes(childId)
+          ? prevIds.filter((id) => id !== childId) // Remove if already selected
+          : [...prevIds, childId] // Add if not selected
+    );
   };
 
+  console.log(selectedChild);
   console.log("CL after", selectedChild);
+
+  // const handleChecked = (event) => {
+  //   const targetId = event.target.id;
+  //   const targetName = event.target.name;
+  //   const targetChecked = event.target.checked;
+
+  //   console.log({ targetId, targetChecked, targetName });
+
+  //   const child = {
+  //     id: targetId,
+  //     name: targetName,
+  //   };
+
+  //   if (targetChecked) {
+  //     setSelectedChild((prevChild) => [...prevChild, child]);
+  //   } else {
+  //     setSelectedChild((prevChild) => {
+  //       return [...prevChild.filter((child) => child.id !== targetId)];
+  //     });
+  //   }
+  // };
+
+  // console.log("CL after", selectedChild);
 
   const handleDelete = async () => {
     //map selected child to name array
-    const ids = selectedChild.map((child) => child.id);
+    // const ids = selectedChild.map((child) => child.id);
 
-    console.log("ids", ids);
-
-    await deleteChild(ids);
+    await deleteChild(selectedChild);
 
     //reset childList
     getChildListFromApi();
@@ -113,11 +123,21 @@ const HomePage = () => {
     const atHome = true;
     // const ids = selectedChild;
 
-    const ids = selectedChild.map((child) => child.id);
-    const list = selectedChild.map((child) => child.name);
-    const formattedList = list.join(", ");
+    // const ids = selectedChild.map((child) => child.id);
+    // const list = selectedChild.map((child) => child.name);
+
+    // Find the selected children from the childList
+    const selectedChildren = childList.filter((child) =>
+      selectedChild.includes(child.id)
+    );
+    console.log("selectedChildren", selectedChildren);
+
+    // Extract the names of the selected children
+    const selectedChildNames = selectedChildren.map((child) => child.name);
+
+    const formattedList = selectedChildNames.join(", ");
     setPickedUpChildName(formattedList);
-    await updateChild(atHome, ids);
+    await updateChild(atHome, selectedChild);
 
     //reset childList
     getChildListFromApi();
@@ -132,13 +152,21 @@ const HomePage = () => {
 
   const handleDropOff = async () => {
     const atHome = false;
-    const ids = selectedChild.map((child) => child.id);
-    const list = selectedChild.map((child) => child.name);
-    const formattedList = list.join(", ");
-    setDroppedOffChildName(formattedList);
-    console.log("ids", ids);
+    // const ids = selectedChild.map((child) => child.id);
+    // const list = selectedChild.map((child) => child.name);
 
-    await updateChild(atHome, ids);
+    // Find the selected children from the childList
+    const selectedChildren = childList.filter((child) =>
+      selectedChild.includes(child.id)
+    );
+    console.log("selectedChildren", selectedChildren);
+
+    // Extract the names of the selected children
+    const selectedChildNames = selectedChildren.map((child) => child.name);
+    const formattedList = selectedChildNames.join(", ");
+    setDroppedOffChildName(formattedList);
+
+    await updateChild(atHome, selectedChild);
 
     //reset childList
     getChildListFromApi();
@@ -182,9 +210,8 @@ const HomePage = () => {
                 key={child.id}
                 id={child.id}
                 name={child.name}
-                toggleSelect={handleChecked}
-                selected={checkSelectChild(child.id)}
-                // checked={isChecked}
+                toggleSelect={handleChecked(child.id)}
+                checked={selectedChild.includes(child.id)}
               />
             );
           })}
