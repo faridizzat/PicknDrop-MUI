@@ -7,7 +7,6 @@ const ChildStatus = (props) => {
   const childAtHomeList = childList.filter((child) => child.at_home);
 
   const childInSchoolList = childList.filter((child) => !child.at_home);
-
   return (
     <>
       {/* Box 1 */}
@@ -49,7 +48,7 @@ const ChildStatus = (props) => {
             >
               <Avatar
                 alt={child.name}
-                src={child.imgPath}
+                src={child.img_path}
                 sx={{ width: 100, height: 100 }}
               />
 
@@ -100,7 +99,7 @@ const ChildStatus = (props) => {
             >
               <Avatar
                 alt={child.name}
-                src={child.imgPath}
+                src={child.img_path}
                 sx={{ width: 100, height: 100 }}
               />
 

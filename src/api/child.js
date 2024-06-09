@@ -10,6 +10,7 @@ export const getChild = async () => {
       },
     });
     const data = await response.json();
+    console.log("RES", data);
 
     return data;
   } catch (error) {
@@ -17,7 +18,7 @@ export const getChild = async () => {
   }
 };
 
-export const addChild = async (name) => {
+export const addChild = async (name, imgPath) => {
   try {
     const token = window.localStorage.getItem("token");
     const response = await fetch(`http://localhost:3000/children`, {
@@ -26,7 +27,7 @@ export const addChild = async (name) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name: name }),
+      body: JSON.stringify({ name: name, imgPath: imgPath }),
     });
     const data = await response.json();
     return data;

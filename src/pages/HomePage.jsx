@@ -46,14 +46,17 @@ const HomePage = () => {
     setDialogPickup(!dialogPickup);
   };
 
-  const handleAddNewChildName = async (name) => {
-    const data = await addChild(name);
+  const handleAddNewChildName = async (name, imgPath) => {
+    const img = generateRandomImage();
+    const data = await addChild(name, img);
 
     const newChild = {
       id: data.id,
       name: data.name,
       isAtHome: data.at_home,
+      imgPath: data.imgpath,
     };
+    console.log(newChild);
 
     //reset childList
     getChildListFromApi();
@@ -139,6 +142,8 @@ const HomePage = () => {
     setOpenDialogAddChild(false);
   };
 
+  console.log(childList);
+
   return (
     <>
       <Navbar />
@@ -157,6 +162,7 @@ const HomePage = () => {
                 key={child.id}
                 id={child.id}
                 name={child.name}
+                imgPath={child.img_path}
                 toggleSelect={handleChecked(child.id)}
                 checked={selectedChild.includes(child.id)}
               />
