@@ -9,9 +9,12 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/auth.js";
+import useAuth from "../hooks/useAuth.js";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
+  const { setAuth } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,14 +28,17 @@ const LoginPage = () => {
     const token = data.token;
     if (token) window.localStorage.setItem("token", token);
 
+    console.log({ email, password, token });
+
+    setAuth({ email, password, token });
+
+    navigate("/");
     event.target.reset();
 
     if (!token) {
       alert("Login Failed");
       return;
     }
-
-    navigate("/");
   };
 
   return (
