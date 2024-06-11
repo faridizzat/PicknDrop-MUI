@@ -9,7 +9,7 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
-import { getUserById } from "../api/user";
+import { getUserById, updateUserById } from "../api/user";
 
 const ProfilePage = () => {
   const [name, setName] = useState("");
@@ -37,13 +37,15 @@ const ProfilePage = () => {
     getUser();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const name = formData.get("name");
     const email = formData.get("email");
-    const password = formData.get("password");
-    console.log({ name, email, password });
+
+    await updateUserById(name, email);
+    // const password = formData.get("password");
+    console.log({ name, email });
 
     setIsReadOnly(!isReadOnly);
     setEditMode(!editMode);
@@ -91,6 +93,7 @@ const ProfilePage = () => {
                     onClick={handleEdit}
                     sx={{
                       display: editMode ? "none" : "block",
+                      visibility: isReadOnly ? "visible" : "hidden",
                     }}
                   />
                 </Button>
@@ -123,6 +126,7 @@ const ProfilePage = () => {
                     onClick={handleEdit}
                     sx={{
                       display: editMode ? "none" : "block",
+                      visibility: isReadOnly ? "visible" : "hidden",
                     }}
                   />
                 </Button>
