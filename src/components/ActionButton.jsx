@@ -3,9 +3,15 @@ import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import PropTypes from "prop-types";
 
 const ActionButton = (props) => {
-  const childList = props.childList;
+  const selectedChild = props.childList;
 
-  const isChildSelected = childList.some((child) => child.isSelected);
+  const isChildSelected = () => {
+    if (selectedChild.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <Box
@@ -28,7 +34,7 @@ const ActionButton = (props) => {
           borderRadius: "2rem",
         }}
         onClick={props.handleDropOff}
-        disabled={!isChildSelected}
+        disabled={!isChildSelected()}
       >
         Drop Off
       </Button>
@@ -42,7 +48,7 @@ const ActionButton = (props) => {
             color: "red",
           }}
           onClick={props.handleDelete}
-          disabled={!isChildSelected}
+          disabled={!isChildSelected()}
         />
       </Button>
       <Button
@@ -58,7 +64,7 @@ const ActionButton = (props) => {
           borderRadius: "2rem",
         }}
         onClick={props.handlePickup}
-        disabled={!isChildSelected}
+        disabled={!isChildSelected()}
       >
         Pick up
       </Button>

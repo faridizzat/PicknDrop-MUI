@@ -3,14 +3,14 @@ import Navbar from "../components/Navbar";
 import DateToday from "../components/DateToday";
 import ChildStatus from "../components/ChildStatus";
 import ActionButton from "../components/ActionButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AvatarChild from "../components/AvatarChild";
 import DialogDropoff from "../components/DialogDropoff";
 import DialogPickup from "../components/DialogPickup";
 import generateRandomImage from "../utils/generateRandomImage";
-import generateRandomHex from "../utils/generateRandomHex";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
+import { getChild, addChild, deleteChild, updateChild } from "../api/child.js";
 
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
@@ -19,6 +19,22 @@ const HomePage = () => {
   const [dialogDropoff, setDialogDropoff] = useState(false);
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
+  const [selectedChild, setSelectedChild] = useState([]);
+
+  const getChildListFromApi = async () => {
+    const dataFromAPI = await getChild();
+    const childList = dataFromAPI.data;
+    //if childList in not empty array, setchildlist
+    if (childList.length > 0) {
+      setChildList(childList);
+      return;
+    }
+    return;
+  };
+
+  useEffect(() => {
+    getChildListFromApi();
+  }, []);
 
   const toggleDialogDropoff = () => {
     setDialogDropoff(!dialogDropoff);
@@ -28,85 +44,90 @@ const HomePage = () => {
     setDialogPickup(!dialogPickup);
   };
 
-  const handleAddNewChildName = (name) => {
+  const handleAddNewChildName = async (name) => {
+    const img = generateRandomImage();
+    const data = await addChild(name, img);
+
     const newChild = {
-      id: generateRandomHex(),
-      name,
-      imgPath: generateRandomImage(),
-      isAtHome: true,
-      isSelected: false,
+      id: data.id,
+      name: data.name,
+      isAtHome: data.at_home,
+      imgPath: data.imgpath,
     };
+    console.log(newChild);
+
+    //reset childList
+    getChildListFromApi();
 
     const newChildList = [...childList, newChild];
     setChildList(newChildList);
   };
 
-  const handleChecked = (event) => {
-    const targetId = event.target.id;
-    const targetChecked = event.target.checked;
-
-    const selectedChildList = childList.map((child) => {
-      if (child.id === targetId) {
-        return {
-          ...child,
-          isSelected: targetChecked,
-        };
-      } else {
-        return child;
-      }
-    });
-    setChildList(selectedChildList);
+  const handleChecked = (childId) => () => {
+    setSelectedChild(
+      (prevIds) =>
+        prevIds.includes(childId)
+          ? prevIds.filter((id) => id !== childId) // Remove if already selected
+          : [...prevIds, childId] // Add if not selected
+    );
   };
 
-  const handleDelete = () => {
-    const newChildList = childList.filter((child) => !child.isSelected);
-    setChildList(newChildList);
+  const handleDelete = async () => {
+    await deleteChild(selectedChild);
+
+    //reset childList
+    getChildListFromApi();
+
+    //set selected child empty again
+    setSelectedChild([]);
   };
 
-  const handlePickup = () => {
-    const newChildList = childList.map((child) => {
-      const newChildListName = childList
-        .filter((child) => child.isSelected)
-        .map((child) => child.name);
-      const formattedChildListName = newChildListName.join(", ");
-      setPickedUpChildName(formattedChildListName);
+  const handlePickup = async () => {
+    const atHome = true;
 
-      if (!child.isSelected) {
-        return child;
-      }
+    // Find the selected children from the childList
+    const selectedChildren = childList.filter((child) =>
+      selectedChild.includes(child.id)
+    );
 
-      return {
-        ...child,
-        isSelected: false,
-        isAtHome: true,
-      };
-    });
-    setChildList(newChildList);
+    // Extract the names of the selected children
+    const selectedChildNames = selectedChildren.map((child) => child.name);
+
+    const formattedList = selectedChildNames.join(", ");
+    setPickedUpChildName(formattedList);
+    await updateChild(atHome, selectedChild);
+
+    //reset childList
+    getChildListFromApi();
+
+    //set selected child empty again
+    setSelectedChild([]);
 
     toggleDialogPickup();
   };
 
-  const handleDropOff = () => {
-    const newChildListName = childList
-      .filter((child) => child.isSelected)
-      .map((child) => child.name);
-    const formattedChildListName = newChildListName.join(", ");
-    setDroppedOffChildName(formattedChildListName);
+  const handleDropOff = async () => {
+    const atHome = false;
+    // Find the selected children from the childList
+    const selectedChildren = childList.filter((child) =>
+      selectedChild.includes(child.id)
+    );
 
-    const newChildList = childList.map((child) => {
-      if (!child.isSelected) {
-        return child;
-      }
+    // Extract the names of the selected children
+    const selectedChildNames = selectedChildren.map((child) => child.name);
+    const formattedList = selectedChildNames.join(", ");
+    setDroppedOffChildName(formattedList);
 
-      return {
-        ...child,
-        isSelected: false,
-        isAtHome: false,
-      };
-    });
-    setChildList(newChildList);
+    await updateChild(atHome, selectedChild);
+
+    //reset childList
+    getChildListFromApi();
+
+    //set selected child empty again
+    setSelectedChild([]);
 
     toggleDialogDropoff();
+    // setIsChecked(false);
   };
 
   const handleClickOpen = () => {
@@ -135,9 +156,9 @@ const HomePage = () => {
                 key={child.id}
                 id={child.id}
                 name={child.name}
-                imgPath={child.imgPath}
-                checked={child.isSelected}
-                toggleSelect={handleChecked}
+                imgPath={child.img_path}
+                toggleSelect={handleChecked(child.id)}
+                checked={selectedChild.includes(child.id)}
               />
             );
           })}
@@ -159,7 +180,7 @@ const HomePage = () => {
             handleDropOff={handleDropOff}
             handleDelete={handleDelete}
             handlePickup={handlePickup}
-            childList={childList}
+            childList={selectedChild}
           />
         </Box>
 

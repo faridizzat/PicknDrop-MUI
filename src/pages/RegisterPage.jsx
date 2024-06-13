@@ -22,7 +22,6 @@ const RegisterPage = () => {
 
     console.log({ name, email, password });
 
-    // Call API untuk register sini
     const data = await registerUser({
       name,
       email,
@@ -36,7 +35,7 @@ const RegisterPage = () => {
 
     event.target.reset();
 
-    if (token) navigate("/home");
+    if (token) navigate("/");
   };
 
   return (

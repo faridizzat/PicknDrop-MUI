@@ -3,20 +3,15 @@ import PropTypes from "prop-types";
 
 const AvatarChild = (props) => {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      m={2}
-      key={props.id}
-    >
+    <Box display="flex" flexDirection="column" alignItems="center" m={2}>
       <label htmlFor={props.id}>
         <Checkbox
           id={props.id}
           name={props.name}
+          value={props.id}
           sx={{ display: "none" }}
-          checked={props.checked}
           onChange={props.toggleSelect}
+          checked={props.checked}
         />
 
         <Avatar
@@ -29,6 +24,10 @@ const AvatarChild = (props) => {
             boxShadow: props.checked
               ? "10px 10px 5px 0px rgba(0,0,0,0.75)"
               : "none",
+
+            "&:hover": {
+              boxShadow: "10px 10px 5px 0px rgba(0,0,0,0.75)",
+            },
           }}
         />
       </label>
@@ -41,11 +40,11 @@ const AvatarChild = (props) => {
 };
 
 AvatarChild.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.number || PropTypes.string,
   name: PropTypes.string,
   imgPath: PropTypes.string,
-  checked: PropTypes.bool,
   toggleSelect: PropTypes.func,
+  checked: PropTypes.bool,
 };
 
 export default AvatarChild;

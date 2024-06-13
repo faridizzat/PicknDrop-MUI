@@ -3,23 +3,45 @@ import HomePage from "../pages/HomePage";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "../pages/ProfilePage";
+import TestPage from "../pages/TestPage";
+import RequireAuth from "../components/RequireAuth";
+import Layout from "../components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage />,
-  },
-  {
-    path: "/home",
-    element: <HomePage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
-  {
-    path: "/profile",
-    element: <ProfilePage />,
+    element: <Layout />,
+
+    children: [
+      // Public paths
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "/test",
+        element: <TestPage />,
+      },
+
+      // Private paths
+      {
+        element: <RequireAuth />,
+        children: [
+          {
+            path: "/profile",
+            element: <ProfilePage />,
+          },
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

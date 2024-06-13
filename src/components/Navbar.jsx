@@ -29,7 +29,7 @@ export default function Navbar() {
                     fontWeight: "bold",
                     fontFamily: "Roboto, sans-serif",
                   }}
-                  to={isAuth ? "/home" : "/"}
+                  to={isAuth ? "/" : "/login"}
                 >
                   PicknDrop
                 </RouterLink>
@@ -60,7 +60,7 @@ export default function Navbar() {
                   margin: "0.25rem 0.5rem",
                   display: isAuth ? "block" : "none",
                 }}
-                to="/"
+                to="/login"
               >
                 LOGOUT
               </RouterLink>
@@ -91,7 +91,7 @@ export default function Navbar() {
                   margin: "0.25rem 0.5rem",
                   display: isAuth ? "none" : "block",
                 }}
-                to="/"
+                to="/login"
               >
                 LOGIN
               </RouterLink>
