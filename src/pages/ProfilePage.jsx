@@ -31,8 +31,6 @@ const ProfilePage = () => {
     return;
   };
 
-  // console.log(name, email);
-
   useEffect(() => {
     getUser();
   }, []);
@@ -44,8 +42,6 @@ const ProfilePage = () => {
     const email = formData.get("email");
 
     await updateUserById(name, email);
-    // const password = formData.get("password");
-    console.log({ name, email });
 
     setIsReadOnly(!isReadOnly);
     setEditMode(!editMode);
@@ -133,36 +129,6 @@ const ProfilePage = () => {
               </Box>
             </Box>
 
-            {/* <Box
-              m={1}
-              display={"flex"}
-              flexDirection={"row"}
-              justifyContent={"space-between"}
-            >
-              <Typography variant="body1" gutterBottom>
-                Password
-              </Typography>
-              <Box display={"flex"} flexDirection={"row"}>
-                <TextField
-                  id="password"
-                  name="password"
-                  type="password"
-                  defaultValue={password}
-                  InputProps={{
-                    readOnly: isReadOnly,
-                  }}
-                  variant="standard"
-                />
-                <Button>
-                  <EditIcon
-                    onClick={handleEdit}
-                    sx={{
-                      display: editMode ? "none" : "block",
-                    }}
-                  />
-                </Button>
-              </Box>
-            </Box> */}
             <Button
               variant="contained"
               sx={{ margin: "0.3rem 0" }}

@@ -22,7 +22,6 @@ const RegisterPage = () => {
 
     console.log({ name, email, password });
 
-    // Call API untuk register sini
     const data = await registerUser({
       name,
       email,

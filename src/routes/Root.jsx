@@ -7,29 +7,6 @@ import TestPage from "../pages/TestPage";
 import RequireAuth from "../components/RequireAuth";
 import Layout from "../components/Layout";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/login",
-//     element: <LoginPage />,
-//   },
-//   {
-//     path: "/register",
-//     element: <RegisterPage />,
-//   },
-//   {
-//     path: "/",
-//     element: <HomePage />,
-//   },
-//   {
-//     path: "/profile",
-//     element: <ProfilePage />,
-//   },
-//   {
-//     path: "/test",
-//     element: <TestPage />,
-//   },
-// ]);
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,7 +29,7 @@ const router = createBrowserRouter([
 
       // Private paths
       {
-        element: <RequireAuth />, // Wrap private routes with RequireAuth
+        element: <RequireAuth />,
         children: [
           {
             path: "/profile",
