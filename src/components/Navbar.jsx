@@ -35,6 +35,23 @@ export default function Navbar() {
                 </RouterLink>
               </Button>
             </Box>
+
+            <Button>
+              <RouterLink
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "1rem",
+                  margin: "0.25rem 0.5rem",
+                  display: isAuth ? "block" : "none",
+                }}
+                to="/attendance"
+              >
+                Attendance
+              </RouterLink>
+            </Button>
+
             <Button>
               <RouterLink
                 style={{
