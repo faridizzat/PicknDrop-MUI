@@ -44,7 +44,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "block" : "none",
+                  visibility: isAuth ? "visible" : "hidden",
                 }}
                 to="/attendance"
               >
@@ -60,7 +60,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "block" : "none",
+                  visibility: isAuth ? "visible" : "hidden",
                 }}
                 to="/profile"
               >
@@ -75,7 +75,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "block" : "none",
+                  visibility: isAuth ? "visible" : "hidden",
                 }}
                 to="/login"
               >
@@ -90,7 +90,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "none" : "block",
+                  visibility: isAuth ? "hidden" : "visible",
                 }}
                 to="/register"
               >
@@ -106,7 +106,7 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "none" : "block",
+                  visibility: isAuth ? "hidden" : "visible",
                 }}
                 to="/login"
               >

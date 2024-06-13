@@ -28,7 +28,7 @@ const AttendancePage = () => {
       <Navbar />
       <Container maxWidth="lg">
         <TableContainer component={Paper} sx={{ mt: 2 }}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
