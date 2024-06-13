@@ -23,8 +23,6 @@ const AttendancePage = () => {
     getAttendanceList();
   }, []);
 
-  console.log(attendanceList);
-
   return (
     <>
       <Navbar />
@@ -40,7 +38,7 @@ const AttendancePage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {attendanceList.map((list) => (
+              {attendanceList?.map((list) => (
                 <TableRow
                   key={list.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

@@ -11,7 +11,8 @@ import generateRandomImage from "../utils/generateRandomImage";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DialogAddChild from "../components/DialogAddChild";
 import { getChild, addChild, deleteChild, updateChild } from "../api/child.js";
-
+import { createAttendance, updateAttendance } from "../api/attendance.js";
+import date from "date-and-time";
 const HomePage = () => {
   const [childList, setChildList] = useState([]);
   const [pickedUpChildName, setPickedUpChildName] = useState([]);
@@ -20,6 +21,9 @@ const HomePage = () => {
   const [dialogPickup, setDialogPickup] = useState(false);
   const [openDialogAddChild, setOpenDialogAddChild] = useState(false);
   const [selectedChild, setSelectedChild] = useState([]);
+
+  const now = new Date();
+  const formattedDate = date.format(now, "DD/MM/YYYY");
 
   const getChildListFromApi = async () => {
     const dataFromAPI = await getChild();
@@ -96,6 +100,8 @@ const HomePage = () => {
     const formattedList = selectedChildNames.join(", ");
     setPickedUpChildName(formattedList);
     await updateChild(atHome, selectedChild);
+    await createAttendance(selectedChild, formattedDate);
+    await updateAttendance(atHome, selectedChild, formattedDate);
 
     //reset childList
     getChildListFromApi();
@@ -119,6 +125,8 @@ const HomePage = () => {
     setDroppedOffChildName(formattedList);
 
     await updateChild(atHome, selectedChild);
+    await createAttendance(selectedChild, formattedDate);
+    await updateAttendance(atHome, selectedChild, formattedDate);
 
     //reset childList
     getChildListFromApi();
@@ -150,7 +158,7 @@ const HomePage = () => {
           justifyContent={"center"}
           flexWrap={"wrap"}
         >
-          {childList.map((child) => {
+          {childList?.map((child) => {
             return (
               <AvatarChild
                 key={child.id}
