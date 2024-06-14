@@ -58,7 +58,6 @@ const HomePage = () => {
       isAtHome: data.at_home,
       imgPath: data.imgpath,
     };
-    console.log(newChild);
 
     //reset childList
     getChildListFromApi();

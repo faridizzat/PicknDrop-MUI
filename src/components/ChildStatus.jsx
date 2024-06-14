@@ -37,7 +37,7 @@ const ChildStatus = (props) => {
           flexWrap="wrap"
           justifyContent="center"
         >
-          {childAtHomeList.map((child) => (
+          {childAtHomeList?.map((child) => (
             <Box
               display="flex"
               flexDirection="column"
@@ -88,7 +88,7 @@ const ChildStatus = (props) => {
           flexWrap="wrap"
           justifyContent="center"
         >
-          {childInSchoolList.map((child) => (
+          {childInSchoolList?.map((child) => (
             <Box
               display="flex"
               flexDirection="column"
