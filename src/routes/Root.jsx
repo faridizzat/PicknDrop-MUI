@@ -15,12 +15,12 @@ const router = createBrowserRouter([
     children: [
       // Public paths
       {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
         path: "/register",
         element: <RegisterPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
       },
 
       // Private paths
@@ -28,12 +28,12 @@ const router = createBrowserRouter([
         element: <RequireAuth />,
         children: [
           {
-            path: "/profile",
-            element: <ProfilePage />,
-          },
-          {
             path: "/",
             element: <HomePage />,
+          },
+          {
+            path: "/profile",
+            element: <ProfilePage />,
           },
           {
             path: "/attendance",
