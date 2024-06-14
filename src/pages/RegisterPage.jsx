@@ -20,8 +20,6 @@ const RegisterPage = () => {
     const email = formContent.email.value;
     const password = formContent.password.value;
 
-    console.log({ name, email, password });
-
     const data = await registerUser({
       name,
       email,

@@ -79,12 +79,13 @@ const HomePage = () => {
     await deleteChild(selectedChild);
 
     //reset childList
-    getChildListFromApi();
+    const dataFromAPI = await getChild();
+    const childList = dataFromAPI.data;
+    setChildList(childList);
 
     //set selected child empty again
     setSelectedChild([]);
   };
-
   const handlePickup = async () => {
     const atHome = true;
 
