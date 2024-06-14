@@ -2,7 +2,7 @@ export const getAttandanceById = async () => {
   try {
     const token = window.localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:3000/attendance`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/attendance`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const getAttandanceById = async () => {
 export const createAttendance = async (childId, attendanceDate) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`http://localhost:3000/attendance`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/attendance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export const createAttendance = async (childId, attendanceDate) => {
 export const updateAttendance = async (at_home, childId, attendanceDate) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`http://localhost:3000/attendance`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/attendance`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

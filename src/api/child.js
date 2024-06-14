@@ -2,7 +2,7 @@ export const getChild = async () => {
   try {
     const token = window.localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:3000/children`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const getChild = async () => {
 export const addChild = async (name, imgPath) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`http://localhost:3000/children`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const addChild = async (name, imgPath) => {
 export const updateChild = async (at_home, id) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`http://localhost:3000/children`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const updateChild = async (at_home, id) => {
 export const deleteChild = async (id) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`http://localhost:3000/children`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

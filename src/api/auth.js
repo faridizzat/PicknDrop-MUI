@@ -1,18 +1,6 @@
 export const registerUser = async ({ name, email, password }) => {
   try {
-    // const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: name,
-    //     email: email,
-    //     password: password,
-    //   }),
-    // });
-
-    const response = await fetch(`http://localhost:3000/register`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,19 +22,8 @@ export const registerUser = async ({ name, email, password }) => {
 
 export const loginUser = async ({ email, password }) => {
   try {
-    // const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: name,
-    //     email: email,
-    //     password: password,
-    //   }),
-    // });
-
-    const response = await fetch(`http://localhost:3000/login`, {
+    console.log(import.meta.env.VITE_API_URL);
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
