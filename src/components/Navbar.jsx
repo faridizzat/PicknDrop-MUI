@@ -36,7 +36,7 @@ export default function Navbar() {
               </Button>
             </Box>
 
-            <Button sx={{ visibility: isAuth ? "visible" : "hidden" }}>
+            <Button sx={{ display: isAuth ? "block" : "none" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -51,7 +51,7 @@ export default function Navbar() {
               </RouterLink>
             </Button>
 
-            <Button sx={{ visibility: isAuth ? "visible" : "hidden" }}>
+            <Button sx={{ display: isAuth ? "block" : "none" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -67,7 +67,7 @@ export default function Navbar() {
             </Button>
             <Button
               onClick={handleLogout}
-              sx={{ visibility: isAuth ? "visible" : "hidden" }}
+              sx={{ display: isAuth ? "block" : "none" }}
             >
               <RouterLink
                 style={{
@@ -82,7 +82,7 @@ export default function Navbar() {
                 LOGOUT
               </RouterLink>
             </Button>
-            <Button sx={{ visibility: isAuth ? "hidden" : "visible" }}>
+            <Button sx={{ display: isAuth ? "none" : "block" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -97,7 +97,7 @@ export default function Navbar() {
               </RouterLink>
             </Button>
 
-            <Button sx={{ visibility: isAuth ? "hidden" : "visible" }}>
+            <Button sx={{ display: isAuth ? "none" : "block" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
