@@ -35,7 +35,8 @@ export default function Navbar() {
                 </RouterLink>
               </Button>
             </Box>
-            <Button>
+
+            <Button sx={{ display: isAuth ? "block" : "none" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -43,14 +44,31 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "block" : "none",
+                }}
+                to="/attendance"
+              >
+                Attendance
+              </RouterLink>
+            </Button>
+
+            <Button sx={{ display: isAuth ? "block" : "none" }}>
+              <RouterLink
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  fontFamily: "Roboto, sans-serif",
+                  fontSize: "1rem",
+                  margin: "0.25rem 0.5rem",
                 }}
                 to="/profile"
               >
                 PROFILE
               </RouterLink>
             </Button>
-            <Button onClick={handleLogout}>
+            <Button
+              onClick={handleLogout}
+              sx={{ display: isAuth ? "block" : "none" }}
+            >
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -58,14 +76,13 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "block" : "none",
                 }}
                 to="/login"
               >
                 LOGOUT
               </RouterLink>
             </Button>
-            <Button>
+            <Button sx={{ display: isAuth ? "none" : "block" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -73,7 +90,6 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "none" : "block",
                 }}
                 to="/register"
               >
@@ -81,7 +97,7 @@ export default function Navbar() {
               </RouterLink>
             </Button>
 
-            <Button>
+            <Button sx={{ display: isAuth ? "none" : "block" }}>
               <RouterLink
                 style={{
                   textDecoration: "none",
@@ -89,7 +105,6 @@ export default function Navbar() {
                   fontFamily: "Roboto, sans-serif",
                   fontSize: "1rem",
                   margin: "0.25rem 0.5rem",
-                  display: isAuth ? "none" : "block",
                 }}
                 to="/login"
               >

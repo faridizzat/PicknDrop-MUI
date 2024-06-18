@@ -2,7 +2,7 @@ export const getUserById = async () => {
   try {
     const token = window.localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:3000/user`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export const updateUserById = async (name, email) => {
   try {
     const token = window.localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:3000/user`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

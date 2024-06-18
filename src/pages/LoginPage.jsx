@@ -26,19 +26,20 @@ const LoginPage = () => {
     const data = await loginUser({ email, password });
 
     const token = data.token;
-    if (token) window.localStorage.setItem("token", token);
 
-    console.log({ email, password, token });
+    //if no token, terminate session
+    if (!token) {
+      alert("Login Failed");
+      return;
+    }
+
+    //if token true, set token in local storage and navigate to home page
+    window.localStorage.setItem("token", token);
 
     setAuth({ email, password, token });
 
     navigate("/");
     event.target.reset();
-
-    if (!token) {
-      alert("Login Failed");
-      return;
-    }
   };
 
   return (

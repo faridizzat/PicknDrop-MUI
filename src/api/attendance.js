@@ -1,8 +1,8 @@
-export const getChild = async () => {
+export const getAttandanceById = async () => {
   try {
     const token = window.localStorage.getItem("token");
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/attendance`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,36 +17,18 @@ export const getChild = async () => {
   }
 };
 
-export const addChild = async (name, imgPath) => {
+export const createAttendance = async (childId, attendanceDate) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/attendance`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name: name, imgPath: imgPath }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const updateChild = async (at_home, id) => {
-  try {
-    const token = window.localStorage.getItem("token");
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
       body: JSON.stringify({
-        at_home: at_home,
-        id: id,
+        childId: childId,
+        attendanceDate: attendanceDate,
       }),
     });
     const data = await response.json();
@@ -56,17 +38,19 @@ export const updateChild = async (at_home, id) => {
   }
 };
 
-export const deleteChild = async (id) => {
+export const updateAttendance = async (at_home, childId, attendanceDate) => {
   try {
     const token = window.localStorage.getItem("token");
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/children`, {
-      method: "DELETE",
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/attendance`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        id: id,
+        at_home: at_home,
+        childId: childId,
+        attendanceDate: attendanceDate,
       }),
     });
     const data = await response.json();
