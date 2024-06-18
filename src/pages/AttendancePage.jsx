@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Container from "@mui/material/Container";
-import { getAttandanceById } from "../api/attendance";
+import { deleteAttendance, getAttandanceById } from "../api/attendance";
 import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +9,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 
 const AttendancePage = () => {
   const [attendanceList, setAttendanceList] = useState([]);
@@ -22,6 +24,11 @@ const AttendancePage = () => {
   useEffect(() => {
     getAttendanceList();
   }, []);
+
+  const handleDelete = async () => {
+    const deleteList = await deleteAttendance();
+    setAttendanceList(deleteList);
+  };
 
   return (
     <>
@@ -49,6 +56,15 @@ const AttendancePage = () => {
                   <TableCell align="right">{list.attendance_date}</TableCell>
                   <TableCell align="right">{list.pickup_time}</TableCell>
                   <TableCell align="right">{list.dropoff_time}</TableCell>
+                  <TableCell align="right">
+                    <Button
+                      sx={{ color: "black" }}
+                      size="small"
+                      onClick={handleDelete}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
