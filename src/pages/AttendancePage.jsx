@@ -42,6 +42,7 @@ const AttendancePage = () => {
                 <TableCell align="right">Date</TableCell>
                 <TableCell align="right">Pick Up time</TableCell>
                 <TableCell align="right">Drop Off time</TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
