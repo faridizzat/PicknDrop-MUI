@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Container from "@mui/material/Container";
-import { deleteAttendance, getAttandanceById } from "../api/attendance";
+import { deleteAttendance, getAttendanceById } from "../api/attendance";
 import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +15,7 @@ const AttendancePage = () => {
   const [attendanceList, setAttendanceList] = useState([]);
 
   const getAttendanceList = async () => {
-    const attendanceListData = await getAttandanceById();
+    const attendanceListData = await getAttendanceById();
     const attendanceList = attendanceListData.data;
     setAttendanceList(attendanceList);
   };
@@ -25,8 +25,19 @@ const AttendancePage = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    const deleteList = await deleteAttendance(id);
+    await deleteAttendance(id);
+    getAttendanceList();
   };
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     console.log("id", id);
+  //     await deleteAttendance(id);
+  //     await getAttendanceById();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>

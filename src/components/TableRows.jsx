@@ -3,6 +3,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Button, TableCell, TableRow } from "@mui/material";
 
 const TableRows = (props) => {
+  const handleDeleteClick = () => {
+    props.handleDelete(props.id);
+  };
+
   return (
     <TableRow
       key={props.id}
@@ -18,7 +22,7 @@ const TableRows = (props) => {
         <Button
           sx={{ color: "black" }}
           size="small"
-          onClick={props.handleDelete}
+          onClick={handleDeleteClick}
         >
           <DeleteIcon />
         </Button>
