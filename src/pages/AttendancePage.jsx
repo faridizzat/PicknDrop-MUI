@@ -9,8 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Button from "@mui/material/Button";
+import TableRows from "../components/TableRows";
 
 const AttendancePage = () => {
   const [attendanceList, setAttendanceList] = useState([]);
@@ -25,9 +24,8 @@ const AttendancePage = () => {
     getAttendanceList();
   }, []);
 
-  const handleDelete = async () => {
-    const deleteList = await deleteAttendance();
-    setAttendanceList(deleteList);
+  const handleDelete = async (id) => {
+    const deleteList = await deleteAttendance(id);
   };
 
   return (
@@ -46,27 +44,16 @@ const AttendancePage = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {attendanceList?.map((list) => (
-                <TableRow
+              {attendanceList.map((list) => (
+                <TableRows
+                  handleDelete={handleDelete}
                   key={list.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {list.child_name}
-                  </TableCell>
-                  <TableCell align="right">{list.attendance_date}</TableCell>
-                  <TableCell align="right">{list.pickup_time}</TableCell>
-                  <TableCell align="right">{list.dropoff_time}</TableCell>
-                  <TableCell align="right">
-                    <Button
-                      sx={{ color: "black" }}
-                      size="small"
-                      onClick={handleDelete}
-                    >
-                      <DeleteIcon />
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                  id={list.id}
+                  child_name={list.child_name}
+                  attendance_date={list.attendance_date}
+                  pickup_time={list.pickup_time}
+                  dropoff_time={list.dropoff_time}
+                />
               ))}
             </TableBody>
           </Table>
