@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Container from "@mui/material/Container";
-import { getAttandanceById } from "../api/attendance";
+import { deleteAttendance, getAttendanceById } from "../api/attendance";
 import { useState, useEffect } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,12 +9,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import TableRows from "../components/TableRows";
 
 const AttendancePage = () => {
   const [attendanceList, setAttendanceList] = useState([]);
 
   const getAttendanceList = async () => {
-    const attendanceListData = await getAttandanceById();
+    const attendanceListData = await getAttendanceById();
     const attendanceList = attendanceListData.data;
     setAttendanceList(attendanceList);
   };
@@ -22,6 +23,21 @@ const AttendancePage = () => {
   useEffect(() => {
     getAttendanceList();
   }, []);
+
+  const handleDelete = async (id) => {
+    await deleteAttendance(id);
+    getAttendanceList();
+  };
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     console.log("id", id);
+  //     await deleteAttendance(id);
+  //     await getAttendanceById();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -35,21 +51,20 @@ const AttendancePage = () => {
                 <TableCell align="right">Date</TableCell>
                 <TableCell align="right">Pick Up time</TableCell>
                 <TableCell align="right">Drop Off time</TableCell>
+                <TableCell align="right"></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {attendanceList?.map((list) => (
-                <TableRow
+              {attendanceList.map((list) => (
+                <TableRows
+                  handleDelete={handleDelete}
                   key={list.id}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {list.child_name}
-                  </TableCell>
-                  <TableCell align="right">{list.attendance_date}</TableCell>
-                  <TableCell align="right">{list.pickup_time}</TableCell>
-                  <TableCell align="right">{list.dropoff_time}</TableCell>
-                </TableRow>
+                  id={list.id}
+                  child_name={list.child_name}
+                  attendance_date={list.attendance_date}
+                  pickup_time={list.pickup_time}
+                  dropoff_time={list.dropoff_time}
+                />
               ))}
             </TableBody>
           </Table>
